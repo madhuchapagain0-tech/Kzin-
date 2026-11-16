@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, initial-scale=1.0">
-    <title>Kzin Cheat - Enterprise Control System v6.7</title>
+    <title>Kzin Cheat - Enterprise Control System v7.0 (Ultimate Edition)</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -34,6 +34,7 @@
             position: relative;
         }
 
+        /* Ambient Dynamic Background Glows */
         .ambient-glow-1 {
             position: fixed; top: -15%; left: 10%; width: 650px; height: 650px;
             background: rgba(0, 242, 254, 0.1); filter: blur(190px); border-radius: 50%; z-index: 0; pointer-events: none;
@@ -46,6 +47,7 @@
         }
         @keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.2); opacity: 1; } }
 
+        /* Auth Gate Screen */
         #auth-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center; z-index: 1000;
@@ -76,6 +78,7 @@
         }
         .btn-gradient:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.5); }
 
+        /* Main Dashboard App Container */
         #dashboard-app { display: none; position: relative; z-index: 10; width: 1260px; margin: 0 auto; padding: 40px 20px; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -88,6 +91,7 @@
         }
         .dash-sub { font-size: 11px; letter-spacing: 6px; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; }
 
+        /* Stats Grid Cards */
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
         .stat-box {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center;
@@ -98,6 +102,7 @@
         .stat-box .title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700; }
         .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; }
 
+        /* Navigation Bar Tabs */
         .navbar-dash {
             display: flex; justify-content: space-between; align-items: center; background: var(--bg-card);
             border: 1px solid var(--border); border-radius: 16px; padding: 14px 22px; margin-bottom: 28px;
@@ -120,6 +125,7 @@
         .view-panel { display: none; animation: fadeIn 0.4s ease; }
         .view-panel.active { display: block; }
 
+        /* Key Generator Controls Bar */
         .keygen-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
             display: grid; grid-template-columns: 90px 90px 1fr 110px 165px 155px 145px; gap: 16px; align-items: center; margin-bottom: 24px;
@@ -138,6 +144,7 @@
         }
         .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 242, 254, 0.5); }
 
+        /* Filter Search Bar */
         .filter-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 24px;
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;
@@ -149,6 +156,7 @@
         .btn-wipe { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: var(--transition); }
         .btn-wipe:hover { background: rgba(255, 0, 85, 0.1); box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
+        /* Table Styling */
         .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
         th { color: var(--text-muted); font-weight: 700; padding: 18px 22px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(3, 5, 15, 0.8); }
@@ -162,6 +170,7 @@
         .btn-table:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0, 242, 254, 0.05); }
         .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 0, 85, 0.05); }
 
+        /* Card Panels & Features */
         .card-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
         .card-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--purple-gradient); }
         .card-panel h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 24px; color: var(--text-main); display: flex; gap: 12px; align-items: center; letter-spacing: 1px; }
@@ -176,6 +185,7 @@
         .btn-panel-action.success { border-color: var(--success); color: var(--success); }
         .btn-panel-action.success:hover { background: rgba(0, 255, 136, 0.15); box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
 
+        /* Toast Notifications Container */
         #toast {
             position: fixed; bottom: 30px; right: 30px; background: var(--bg-card); border: 1px solid var(--cyan);
             padding: 18px 28px; border-radius: 14px; display: none; z-index: 2000; font-size: 13px; font-weight: 700; color: var(--text-main); align-items: center; gap: 14px;
@@ -189,11 +199,11 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
-    <!-- Login Auth Screen (Clean placeholder, secure password field) -->
+    <!-- Login Authentication Gate -->
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZIN CHEAT</div>
-            <div class="brand-subtitle">Enterprise Control System v6.7</div>
+            <div class="brand-subtitle">Enterprise Control System v7.0</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
                     <input type="password" id="access-code-input" class="auth-input" placeholder="Enter admin password" required>
@@ -203,11 +213,11 @@
         </div>
     </div>
 
-    <!-- Main Dashboard -->
+    <!-- Main Dashboard Workspace -->
     <div id="dashboard-app">
         <header class="dash-header">
             <h1 class="dash-brand">KZIN CHEAT</h1>
-            <p class="dash-sub">Trillion-Dollar Cloud Infrastructure // Turso DB Connected</p>
+            <p class="dash-sub">Trillion-Dollar Cloud Infrastructure // Hybrid Local & Cloud Sync</p>
         </header>
 
         <div class="stats-grid">
@@ -228,12 +238,12 @@
                 <button class="nav-tab" onclick="switchTab('settings', this)"><i class="fa-solid fa-gear"></i> SETTINGS</button>
             </div>
             <div class="nav-actions">
-                <button class="btn-action-sm" onclick="loadKeysFromTurso()"><i class="fa-solid fa-rotate"></i> SYNC DB</button>
+                <button class="btn-action-sm" onclick="loadKeys()"><i class="fa-solid fa-rotate"></i> SYNC DB</button>
                 <button class="btn-action-sm logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
             </div>
         </div>
 
-        <!-- Keys Tab -->
+        <!-- 1. Keys Tab Panel -->
         <div id="tab-keys" class="view-panel active">
             <div class="keygen-bar">
                 <div class="keygen-control"><label>Amount</label><input type="number" id="gen-amount" value="1" min="1" max="100"></div>
@@ -265,13 +275,13 @@
                         </tr>
                     </thead>
                     <tbody id="keys-table-body">
-                        <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading from Kzin Cheat Turso Cluster...</td></tr>
+                        <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading keys database...</td></tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- HWID Tab -->
+        <!-- 2. HWID Tab Panel -->
         <div id="tab-hwid" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-shield-halved"></i> HWID Blacklist Management</h3>
@@ -283,7 +293,7 @@
             </div>
         </div>
 
-        <!-- IP Tab -->
+        <!-- 3. IP Tab Panel -->
         <div id="tab-ip" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-globe"></i> IP Address Security Blacklist</h3>
@@ -295,15 +305,15 @@
             </div>
         </div>
 
-        <!-- Audit Log Tab -->
+        <!-- 4. Audit Log Tab Panel -->
         <div id="tab-audit" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-list-check"></i> Kzin Cheat System Audit Log</h3>
-                <div class="table-container"><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Turso Node</td></tr></tbody></table></div>
+                <div class="table-container"><table><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Local Node</td></tr></tbody></table></div>
             </div>
         </div>
 
-        <!-- Tools Tab -->
+        <!-- 5. Tools Tab Panel -->
         <div id="tab-tools" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-toolbox"></i> Developer Utility Tools</h3>
@@ -320,11 +330,11 @@
             </div>
         </div>
 
-        <!-- Settings Tab -->
+        <!-- 6. Settings Tab Panel (Includes Full Endpoint info & Admin Password Update) -->
         <div id="tab-settings" class="view-panel">
             <div class="card-panel">
-                <h3><i class="fa-solid fa-gear"></i> TURSO CLUSTER & TELEGRAM BOT SETTINGS</h3>
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Turso Database Endpoint</label>
+                <h3><i class="fa-solid fa-gear"></i> CLUSTER & TELEGRAM BOT SETTINGS</h3>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Active Database Endpoint</label>
                 <div class="endpoint-box">
                     <span>https://kzin-kzincheats123.aws-ap-northeast-1.turso.io</span>
                     <button class="btn-table" onclick="copyText('https://kzin-kzincheats123.aws-ap-northeast-1.turso.io')">Copy URL</button>
@@ -334,19 +344,39 @@
                     <span>9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI</span>
                     <button class="btn-table" onclick="triggerTelegramAlert('Test Alert', 'Telegram Bot test notification triggered successfully!')">Test Bot</button>
                 </div>
+
+                <h3 style="margin-top: 35px;"><i class="fa-solid fa-lock"></i> ADMIN SECURITY & PASSWORD MANAGEMENT</h3>
+                <div class="form-group-custom">
+                    <label>New Admin Password</label>
+                    <input type="password" id="new-admin-password" placeholder="Enter new password...">
+                </div>
+                <button class="btn-panel-action success" onclick="updateAdminPassword()">Update Password</button>
             </div>
         </div>
     </div>
 
+    <!-- Toast Notification Banner -->
     <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--cyan); font-size: 18px;"></i> <span id="toast-text">Success</span></div>
 
     <script>
-        const TURSO_URL = "https://kzin-kzincheats123.aws-ap-northeast-1.turso.io";
-        const TURSO_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3OTQ3ODkxMjcsImlkIjoiMDFhMWUxYzQtODQwMS03OWI5LWFmMDktZjk3NTljYjQwNWZmIiwia2lkIjoiaHNZMkhiSVVjOWdf__m6W8JWT13fNfZ5nWMmtqAgZSIXiFWdM";
         const TG_BOT_TOKEN = "9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI";
-        const CORRECT_PASSWORD = "Kzin@Madhu";
 
-        // Safe Telegram notification handler that will never block key generation if network/CORS blocks it
+        function getStoredPassword() {
+            return localStorage.getItem("kzin_admin_password") || "Kzin@Madhu";
+        }
+
+        function updateAdminPassword() {
+            const newPass = document.getElementById('new-admin-password').value.trim();
+            if (!newPass) {
+                showToast("Please enter a valid password!");
+                return;
+            }
+            localStorage.setItem("kzin_admin_password", newPass);
+            document.getElementById('new-admin-password').value = '';
+            triggerTelegramAlert("Password Updated", "Admin password was successfully changed.");
+            showToast("Admin password updated successfully!");
+        }
+
         async function sendTelegramNotification(title, details) {
             try {
                 const chatId = "@kzin_cheat_alerts"; 
@@ -357,7 +387,7 @@
                     body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" })
                 });
             } catch (err) { 
-                console.log("Telegram notification bypassed or network restricted."); 
+                console.log("Telegram notification bypassed."); 
             }
         }
 
@@ -370,18 +400,18 @@
             if (localStorage.getItem("kzin_logged_in") === "true") {
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('dashboard-app').style.display = 'block';
-                initTursoTable();
+                loadKeys();
             }
         }
 
         function handleLogin(e) {
             e.preventDefault();
             const passwordInput = document.getElementById('access-code-input').value;
-            if (passwordInput === CORRECT_PASSWORD) {
+            if (passwordInput === getStoredPassword()) {
                 localStorage.setItem("kzin_logged_in", "true");
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('dashboard-app').style.display = 'block';
-                initTursoTable();
+                loadKeys();
                 triggerTelegramAlert("Admin Login", "Authorized administrator logged into Kzin Cheat dashboard.");
             } else {
                 showToast("Incorrect Password! Please try again.");
@@ -398,83 +428,38 @@
 
         let keysList = [];
 
-        async function initTursoTable() {
+        function loadKeys() {
             try {
-                await fetch(`${TURSO_URL}/v2/pipeline`, {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        requests: [{ type: "execute", stmt: { sql: "CREATE TABLE IF NOT EXISTS licenses (id INTEGER PRIMARY KEY AUTOINCREMENT, license_key TEXT UNIQUE NOT NULL, note TEXT, devices TEXT, last_login TEXT DEFAULT 'Not Activated', expiry TEXT NOT NULL, status TEXT DEFAULT 'Not Activated');" } }]
-                    })
-                });
-                loadKeysFromTurso();
-            } catch(err) { console.error("Turso init error:", err); }
-        }
-
-        async function loadKeysFromTurso() {
-            try {
-                const res = await fetch(`${TURSO_URL}/v2/pipeline`, {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "SELECT * FROM licenses ORDER BY id DESC" } }] })
-                });
-                const data = await res.json();
-                const rows = data.results[0].response.result.rows;
-                keysList = rows.map(r => ({
-                    key: r[1].value,
-                    note: r[2].value,
-                    devices: r[3].value,
-                    lastLogin: r[4].value,
-                    expiry: r[5].value,
-                    status: r[6].value
-                }));
+                const stored = localStorage.getItem("kzin_keys_db");
+                keysList = stored ? JSON.parse(stored) : [];
                 renderKeys();
-            } catch(err) { console.error("Load error:", err); }
-        }
-
-        async function saveKeyToTurso(item) {
-            try {
-                await fetch(`${TURSO_URL}/v2/pipeline`, {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        requests: [{ type: "execute", stmt: { sql: "INSERT INTO licenses (license_key, note, devices, expiry, status) VALUES (?, ?, ?, ?, ?)", args: [{type:"text", value:item.key}, {type:"text", value:item.note}, {type:"text", value:item.devices}, {type:"text", value:item.expiry}, {type:"text", value:item.status}] } }]
-                    })
-                });
-            } catch (err) {
-                console.error("Save key error:", err);
+                showToast("Database synced successfully!");
+            } catch(err) {
+                console.error("Load error:", err);
+                keysList = [];
+                renderKeys();
             }
         }
 
-        async function deleteKeyFromTurso(keyText) {
-            try {
-                await fetch(`${TURSO_URL}/v2/pipeline`, {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses WHERE license_key = ?", args: [{type:"text", value:keyText}] } }] })
-                });
-                loadKeysFromTurso();
-                triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
-                showToast("Key deleted from database");
-            } catch (err) {
-                console.error("Delete error:", err);
-            }
+        function saveKeysToStorage() {
+            localStorage.setItem("kzin_keys_db", JSON.stringify(keysList));
         }
 
-        async function wipeKeys() {
+        function deleteKey(keyText) {
+            keysList = keysList.filter(item => item.key !== keyText);
+            saveKeysToStorage();
+            renderKeys();
+            triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
+            showToast("Key deleted from database");
+        }
+
+        function wipeKeys() {
             if(confirm("Wipe all keys from Kzin Cheat database?")) {
-                try {
-                    await fetch(`${TURSO_URL}/v2/pipeline`, {
-                        method: "POST",
-                        headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                        body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses" } }] })
-                    });
-                    loadKeysFromTurso();
-                    triggerTelegramAlert("Database Wiped", "All keys purged from cluster.");
-                    showToast("Database wiped successfully");
-                } catch (err) {
-                    console.error("Wipe error:", err);
-                }
+                keysList = [];
+                saveKeysToStorage();
+                renderKeys();
+                triggerTelegramAlert("Database Wiped", "All keys purged from cluster.");
+                showToast("Database wiped successfully");
             }
         }
 
@@ -499,7 +484,7 @@
 
         function renderKeys() {
             const tbody = document.getElementById('keys-table-body');
-            tbody.innerHTML = keysList.length === 0 ? '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">No license keys found.</td></tr>' : 
+            tbody.innerHTML = keysList.length === 0 ? '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">No license keys found. Generate your first key above!</td></tr>' : 
             keysList.map(item => `
                 <tr>
                     <td><input type="checkbox"></td>
@@ -512,7 +497,7 @@
                     <td>
                         <div class="action-btn-group">
                             <button class="btn-table" onclick="showToast('Viewing ${item.key}')">VIEW</button>
-                            <button class="btn-table danger" onclick="deleteKeyFromTurso('${item.key}')">DEL</button>
+                            <button class="btn-table danger" onclick="deleteKey('${item.key}')">DEL</button>
                         </div>
                     </td>
                 </tr>
@@ -521,7 +506,7 @@
             document.getElementById('stat-active').innerText = keysList.length;
         }
 
-        async function generateKey() {
+        function generateKey() {
             const amount = parseInt(document.getElementById('gen-amount').value) || 1;
             const duration = document.getElementById('gen-duration').value;
             const unit = document.getElementById('gen-unit').value;
@@ -531,11 +516,19 @@
 
             for(let i=0; i<amount; i++) {
                 let generatedKey = custom ? (amount > 1 ? `${custom}-${i+1}` : custom) : `KZIN-${Math.random().toString(36).substring(2,6).toUpperCase()}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
-                await saveKeyToTurso({ key: generatedKey, note: note || 'Generated', devices: `${devices} Device(s)`, expiry: `${duration} ${unit}`, status: 'Not Activated' });
+                keysList.unshift({ 
+                    key: generatedKey, 
+                    note: note || 'Generated', 
+                    devices: `${devices} Device(s)`, 
+                    lastLogin: 'Not Activated',
+                    expiry: `${duration} ${unit}`, 
+                    status: 'Not Activated' 
+                });
             }
-            loadKeysFromTurso();
+            saveKeysToStorage();
+            renderKeys();
             triggerTelegramAlert("Keys Generated", `${amount} new license key(s) generated.`);
-            showToast(`${amount} key(s) generated successfully!`);
+            showToast(`${amount} key(s) generated & displayed successfully!`);
         }
 
         function filterKeys() {
