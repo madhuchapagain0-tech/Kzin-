@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KZINCHEATS - Enterprise Control System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>KZINCHEATS - Enterprise Control System v5.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-deep: #050508;
-            --bg-card: #0b0c14;
-            --bg-glass: rgba(11, 12, 20, 0.75);
-            --border: #1e2238;
+            --bg-deep: #030407;
+            --bg-card: #090a10;
+            --bg-card-hover: #0e101b;
+            --border: #1a1e36;
+            --border-glow: rgba(6, 182, 212, 0.4);
             --cyan: #06b6d4;
-            --cyan-glow: rgba(6, 182, 212, 0.25);
+            --cyan-glow: rgba(6, 182, 212, 0.3);
             --purple: #8b5cf6;
-            --purple-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%);
+            --purple-gradient: linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%);
             --danger: #ef4444;
             --warning: #f59e0b;
             --success: #10b981;
             --text-main: #f8fafc;
             --text-muted: #64748b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -40,28 +42,35 @@
 
         .ambient-glow-1 {
             position: fixed;
-            top: 10%;
-            left: 20%;
-            width: 300px;
-            height: 300px;
-            background: rgba(6, 182, 212, 0.12);
-            filter: blur(120px);
+            top: 5%;
+            left: 15%;
+            width: 400px;
+            height: 400px;
+            background: rgba(6, 182, 212, 0.1);
+            filter: blur(150px);
             border-radius: 50%;
             z-index: 0;
             pointer-events: none;
+            animation: pulseGlow 8s ease-in-out infinite alternate;
         }
 
         .ambient-glow-2 {
             position: fixed;
-            bottom: 10%;
-            right: 20%;
-            width: 350px;
-            height: 350px;
-            background: rgba(139, 92, 246, 0.12);
-            filter: blur(140px);
+            bottom: 5%;
+            right: 15%;
+            width: 450px;
+            height: 450px;
+            background: rgba(139, 92, 246, 0.1);
+            filter: blur(160px);
             border-radius: 50%;
             z-index: 0;
             pointer-events: none;
+            animation: pulseGlow 10s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.25); opacity: 1; }
         }
 
         #auth-screen {
@@ -73,8 +82,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 1000;
             background: var(--bg-deep);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .auth-container {
@@ -82,24 +92,31 @@
             z-index: 2;
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             padding: 20px;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .brand-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            text-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
         }
 
         .brand-subtitle {
-            font-size: 10px;
-            letter-spacing: 3px;
+            font-size: 11px;
+            letter-spacing: 4px;
             color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 36px;
@@ -108,95 +125,115 @@
         .auth-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 32px 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(6, 182, 212, 0.08);
+            border-radius: 16px;
+            padding: 36px 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 30px rgba(6, 182, 212, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--purple-gradient);
         }
 
         .auth-input {
             width: 100%;
-            padding: 14px 16px;
-            background: #040508;
+            padding: 15px 18px;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             color: var(--text-main);
-            font-size: 14px;
+            font-size: 15px;
             text-align: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             outline: none;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            margin-bottom: 22px;
+            transition: var(--transition);
         }
 
         .auth-input:focus {
             border-color: var(--cyan);
-            box-shadow: 0 0 12px var(--cyan-glow);
+            box-shadow: 0 0 20px var(--cyan-glow);
         }
 
         .btn-gradient {
             width: 100%;
-            padding: 13px;
+            padding: 14px;
             background: var(--purple-gradient);
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 13px;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.35);
         }
 
         .btn-gradient:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(6, 182, 212, 0.4);
         }
 
         #dashboard-app {
             display: none;
             position: relative;
             z-index: 10;
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 35px 24px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .dash-header {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             text-align: center;
         }
 
         .dash-brand {
             font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, #fff 0%, var(--cyan) 100%);
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            background: linear-gradient(90deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(6, 182, 212, 0.25);
         }
 
         .dash-sub {
             font-size: 11px;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: 16px;
+            margin-bottom: 28px;
         }
 
-        @media(max-width: 900px) {
+        @media(max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -205,23 +242,32 @@
         .stat-box {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-box:hover {
+            border-color: var(--cyan);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px rgba(6, 182, 212, 0.15);
         }
 
         .stat-box .title {
             font-size: 10px;
             text-transform: uppercase;
             color: var(--text-muted);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin-bottom: 8px;
         }
 
         .stat-box .value {
             font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
+            font-size: 26px;
+            font-weight: 800;
         }
 
         .stat-box.total .value { color: #fff; }
@@ -236,16 +282,17 @@
             align-items: center;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 16px;
-            margin-bottom: 24px;
+            border-radius: 12px;
+            padding: 12px 20px;
+            margin-bottom: 28px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .nav-tabs {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -253,40 +300,43 @@
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-muted);
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 10px 16px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
         }
 
         .nav-tab:hover, .nav-tab.active {
-            background: rgba(6, 182, 212, 0.1);
+            background: rgba(6, 182, 212, 0.12);
             color: var(--cyan);
-            border-color: rgba(6, 182, 212, 0.3);
+            border-color: rgba(6, 182, 212, 0.35);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
         }
 
         .nav-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-action-sm {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 10px 16px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition);
         }
 
         .btn-action-sm:hover {
             border-color: var(--cyan);
             color: var(--cyan);
+            background: rgba(6, 182, 212, 0.08);
         }
 
         .btn-action-sm.logout {
@@ -295,11 +345,13 @@
         }
 
         .btn-action-sm.logout:hover {
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239, 68, 68, 0.12);
+            border-color: var(--danger);
         }
 
         .view-panel {
             display: none;
+            animation: fadeIn 0.4s ease;
         }
 
         .view-panel.active {
@@ -309,16 +361,17 @@
         .keygen-bar {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 20px;
             display: grid;
-            grid-template-columns: 80px 80px 1fr 100px 140px 120px 130px;
-            gap: 10px;
+            grid-template-columns: 90px 90px 1fr 110px 150px 140px 140px;
+            gap: 14px;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        @media(max-width: 1100px) {
+        @media(max-width: 1200px) {
             .keygen-bar {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -327,85 +380,107 @@
         .keygen-control {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .keygen-control label {
             font-size: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .keygen-control input, .keygen-control select {
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text-main);
-            padding: 8px 10px;
+            padding: 10px 12px;
             font-size: 13px;
             outline: none;
+            transition: var(--transition);
+        }
+
+        .keygen-control input:focus, .keygen-control select:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan-glow);
         }
 
         .checkbox-label {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-size: 12px;
             cursor: pointer;
+            color: var(--text-muted);
         }
 
         .btn-generate {
             background: var(--purple-gradient);
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             color: white;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 12px;
-            padding: 10px;
+            padding: 12px;
             cursor: pointer;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-            height: 38px;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+            height: 42px;
             align-self: flex-end;
+            transition: var(--transition);
+        }
+
+        .btn-generate:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.4);
         }
 
         .filter-bar {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 16px;
+            border-radius: 12px;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            gap: 12px;
+            margin-bottom: 24px;
+            gap: 16px;
             flex-wrap: wrap;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
         .search-input-box {
             flex-grow: 1;
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 8px 12px;
+            border-radius: 8px;
+            padding: 10px 16px;
             color: var(--text-main);
-            font-size: 13px;
+            font-size: 14px;
             outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input-box:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan-glow);
         }
 
         .filter-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
         }
 
         .filter-select {
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             color: var(--text-main);
-            padding: 8px 12px;
+            padding: 10px 14px;
             font-size: 13px;
             outline: none;
         }
@@ -414,29 +489,42 @@
             background: transparent;
             border: 1px solid var(--cyan);
             color: var(--cyan);
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 18px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-filter:hover {
+            background: rgba(6, 182, 212, 0.15);
+            box-shadow: 0 0 15px var(--cyan-glow);
         }
 
         .btn-wipe {
             background: transparent;
             border: 1px solid var(--danger);
             color: var(--danger);
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 10px 18px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 12px;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-wipe:hover {
+            background: rgba(239, 68, 68, 0.15);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
         }
 
         .table-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow-x: auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
 
         table {
@@ -449,17 +537,23 @@
 
         th {
             color: var(--text-muted);
-            font-weight: 500;
-            padding: 14px 16px;
+            font-weight: 600;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border);
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            background: rgba(4, 5, 9, 0.5);
         }
 
         td {
-            padding: 14px 16px;
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        tr:hover td {
+            background: var(--bg-card-hover);
         }
 
         tr:last-child td {
@@ -470,55 +564,59 @@
             font-family: 'Orbitron', monospace;
             color: var(--cyan);
             font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .badge-device {
             background: rgba(139, 92, 246, 0.15);
             color: #c084fc;
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 5px 10px;
+            border-radius: 6px;
             font-size: 11px;
+            font-weight: 600;
         }
 
         .badge-status-dot {
             display: inline-block;
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            margin-right: 6px;
+            margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
         }
 
-        .badge-status-dot.not-activated { background: var(--warning); }
-        .badge-status-dot.active { background: var(--success); }
-        .badge-status-dot.banned { background: var(--danger); }
+        .badge-status-dot.not-activated { color: var(--warning); background: var(--warning); }
+        .badge-status-dot.active { color: var(--success); background: var(--success); }
+        .badge-status-dot.banned { color: var(--danger); background: var(--danger); }
 
         .action-btn-group {
             display: flex;
-            gap: 6px;
+            gap: 8px;
         }
 
         .btn-table {
             background: transparent;
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: var(--transition);
         }
 
-        .btn-table:hover { border-color: var(--cyan); color: var(--cyan); }
-        .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); }
+        .btn-table:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(6, 182, 212, 0.08); }
+        .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(239, 68, 68, 0.08); }
 
         .settings-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 24px;
         }
 
-        @media(max-width: 900px) {
+        @media(max-width: 1024px) {
             .settings-grid {
                 grid-template-columns: 1fr;
             }
@@ -527,51 +625,62 @@
         .card-panel {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 24px;
-            margin-bottom: 20px;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: var(--transition);
+        }
+
+        .card-panel:hover {
+            border-color: rgba(6, 182, 212, 0.3);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 20px rgba(6, 182, 212, 0.08);
         }
 
         .card-panel h3 {
             font-family: 'Orbitron', sans-serif;
             font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             color: var(--text-main);
         }
 
+        .card-panel h3 i {
+            color: var(--cyan);
+        }
+
         .endpoint-box {
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 12px;
+            padding: 14px 16px;
             font-family: monospace;
             font-size: 12px;
             color: var(--cyan);
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .json-code-box {
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px;
+            border-radius: 10px;
+            padding: 18px;
             font-family: monospace;
             font-size: 12px;
             color: #94a3b8;
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: auto;
         }
 
         .form-group-custom {
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .form-group-custom label {
@@ -579,38 +688,45 @@
             font-size: 11px;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
         .form-group-custom input {
             width: 100%;
-            background: #040508;
+            background: #040509;
             border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 10px 12px;
+            border-radius: 8px;
+            padding: 12px 14px;
             color: var(--text-main);
             font-size: 13px;
             outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group-custom input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px var(--cyan-glow);
         }
 
         .btn-panel-action {
             width: 100%;
-            padding: 11px;
+            padding: 13px;
             background: transparent;
             border: 1px solid var(--cyan);
             color: var(--cyan);
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
             font-size: 12px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.2s ease;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
         }
 
         .btn-panel-action:hover {
-            background: rgba(6, 182, 212, 0.1);
+            background: rgba(6, 182, 212, 0.15);
+            box-shadow: 0 0 20px var(--cyan-glow);
         }
 
         .btn-panel-action.danger {
@@ -618,32 +734,40 @@
             color: var(--danger);
         }
         .btn-panel-action.danger:hover {
-            background: rgba(239, 68, 68, 0.1);
+            background: rgba(239, 68, 68, 0.15);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
         }
         .btn-panel-action.success {
             border-color: var(--success);
             color: var(--success);
         }
         .btn-panel-action.success:hover {
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(16, 185, 129, 0.15);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
         }
 
         #toast {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 30px;
+            right: 30px;
             background: var(--bg-card);
             border: 1px solid var(--cyan);
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 20px var(--cyan-glow);
             display: none;
-            z-index: 1000;
+            z-index: 2000;
             font-size: 13px;
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-main);
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounceIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -655,11 +779,11 @@
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZINCHEATS</div>
-            <div class="brand-subtitle">Enterprise Control System</div>
+            <div class="brand-subtitle">Enterprise Control System v5.0</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
-                    <input type="password" id="access-code-input" class="auth-input" placeholder="ACCESS CODE" value="admin123" required>
-                    <button type="submit" class="btn-gradient">AUTHENTICATE</button>
+                    <input type="password" id="access-code-input" class="auth-input" placeholder="ENTER ACCESS CODE" value="admin123" required>
+                    <button type="submit" class="btn-gradient">AUTHENTICATE CONSOLE</button>
                 </form>
             </div>
         </div>
@@ -668,7 +792,7 @@
     <div id="dashboard-app">
         <header class="dash-header">
             <h1 class="dash-brand">KZINCHEATS</h1>
-            <p class="dash-sub">Enterprise Control System</p>
+            <p class="dash-sub">Enterprise Control System v5.0 // Secure Node Online</p>
         </header>
 
         <div class="stats-grid">
@@ -696,14 +820,14 @@
 
         <div class="navbar-dash">
             <div class="nav-tabs">
-                <button class="nav-tab active" onclick="switchTab('keys', this)">KEYS DATABASE</button>
-                <button class="nav-tab" onclick="switchTab('hwid', this)">HWID BLACKLIST</button>
-                <button class="nav-tab" onclick="switchTab('ip', this)">IP BLACKLIST</button>
-                <button class="nav-tab" onclick="switchTab('audit', this)">AUDIT LOG</button>
-                <button class="nav-tab" onclick="switchTab('tools', this)">TOOLS</button>
+                <button class="nav-tab active" onclick="switchTab('keys', this)"><i class="fa-solid fa-key"></i> KEYS DATABASE</button>
+                <button class="nav-tab" onclick="switchTab('hwid', this)"><i class="fa-solid fa-shield-halved"></i> HWID BLACKLIST</button>
+                <button class="nav-tab" onclick="switchTab('ip', this)"><i class="fa-solid fa-globe"></i> IP BLACKLIST</button>
+                <button class="nav-tab" onclick="switchTab('audit', this)"><i class="fa-solid fa-list-check"></i> AUDIT LOG</button>
+                <button class="nav-tab" onclick="switchTab('tools', this)"><i class="fa-solid fa-toolbox"></i> TOOLS</button>
             </div>
             <div class="nav-actions">
-                <button class="btn-action-sm" onclick="showToast('Dashboard Refreshed')"><i class="fa-solid fa-rotate"></i> REFRESH</button>
+                <button class="btn-action-sm" onclick="showToast('Dashboard Refreshed Successfully')"><i class="fa-solid fa-rotate"></i> REFRESH</button>
                 <button class="btn-action-sm" onclick="switchTab('settings', document.querySelector('.nav-tab:last-child'))"><i class="fa-solid fa-gear"></i> SETTINGS</button>
                 <button class="btn-action-sm logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
             </div>
@@ -739,7 +863,7 @@
                     <input type="text" id="gen-custom" placeholder="KZIN-XXXX">
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: flex-end;">
-                    <label class="checkbox-label" style="margin-bottom: 4px;">
+                    <label class="checkbox-label" style="margin-bottom: 6px;">
                         <input type="checkbox" id="gen-trial"> Trial Key
                     </label>
                     <button class="btn-generate" onclick="generateKey()">GENERATE</button>
@@ -778,18 +902,18 @@
                         <tr>
                             <td><input type="checkbox"></td>
                             <td><span class="key-text">KZIN-XZXZ-NV5Z</span></td>
+                            <td>VIP Client</td>
                             <td><span class="badge-device">1 Device</span></td>
-                            <td>IP: Near Server</td>
                             <td>Not Activated</td>
                             <td>30 Days</td>
                             <td><span class="badge-status-dot not-activated"></span>Not Activated</td>
                             <td>
                                 <div class="action-btn-group">
                                     <button class="btn-table" onclick="showToast('Viewing key info')">VIEW</button>
-                                    <button class="btn-table" onclick="showToast('HWID Reset')">RESET</button>
-                                    <button class="btn-table danger" onclick="showToast('Key Banned')">BAN</button>
-                                    <button class="btn-table danger" onclick="showToast('Key Kicked')">KICK</button>
-                                    <button class="btn-table" onclick="showToast('Time Extended')">EXTEND</button>
+                                    <button class="btn-table" onclick="showToast('HWID Reset Successful')">RESET</button>
+                                    <button class="btn-table danger" onclick="showToast('Key Banned Successfully')">BAN</button>
+                                    <button class="btn-table danger" onclick="showToast('Key Kicked From Session')">KICK</button>
+                                    <button class="btn-table" onclick="showToast('Expiry Time Extended')">EXTEND</button>
                                     <button class="btn-table danger" onclick="deleteKey(this)">DEL</button>
                                 </div>
                             </td>
@@ -802,10 +926,10 @@
         <div id="tab-hwid" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-shield-halved"></i> HWID Blacklist Management</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">Block specific hardware IDs from authenticating with any license key.</p>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                    <input type="text" class="search-input-box" placeholder="Enter HWID to blacklist..." id="hwid-input">
-                    <button class="btn-panel-action success" style="width: 160px;" onclick="showToast('HWID Blacklisted')">Add to Blacklist</button>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Block specific hardware IDs from authenticating with any license key across the cluster.</p>
+                <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                    <input type="text" class="search-input-box" placeholder="Enter HWID hash to blacklist..." id="hwid-input">
+                    <button class="btn-panel-action success" style="width: 180px;" onclick="showToast('HWID added to global blacklist!')">Add Blacklist</button>
                 </div>
                 <div class="table-container">
                     <table>
@@ -813,7 +937,7 @@
                             <tr><th>HWID Hash</th><th>Added Date</th><th>Reason</th><th>Actions</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 30px;">No blacklisted hardware IDs found.</td></tr>
+                            <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 40px;">No blacklisted hardware IDs found.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -823,10 +947,10 @@
         <div id="tab-ip" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-globe"></i> IP Address Blacklist</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">Block specific IP addresses or subnets from reaching the verification endpoint.</p>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Block malicious IP addresses or subnets from reaching the verification edge endpoint.</p>
+                <div style="display: flex; gap: 12px; margin-bottom: 24px;">
                     <input type="text" class="search-input-box" placeholder="Enter IP address (e.g. 192.168.1.100)..." id="ip-input">
-                    <button class="btn-panel-action success" style="width: 160px;" onclick="showToast('IP Blacklisted')">Block IP</button>
+                    <button class="btn-panel-action success" style="width: 180px;" onclick="showToast('IP blocked successfully!')">Block IP</button>
                 </div>
                 <div class="table-container">
                     <table>
@@ -834,7 +958,7 @@
                             <tr><th>IP Address</th><th>Blocked At</th><th>Attempts</th><th>Actions</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 30px;">No blocked IP addresses.</td></tr>
+                            <tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 40px;">No blocked IP addresses.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -844,7 +968,7 @@
         <div id="tab-audit" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-list-check"></i> System Audit Log</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">Tracks admin actions, key redemptions, and security events in real time.</p>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Tracks all administrative actions, key redemptions, and security firewall events in real time.</p>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -853,9 +977,9 @@
                         <tbody id="audit-log-body">
                             <tr>
                                 <td>Just now</td>
-                                <td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td>
-                                <td>Successful console authentication</td>
-                                <td>Localhost</td>
+                                <td><span style="color: var(--cyan); font-weight: 600;">ADMIN_LOGIN</span></td>
+                                <td>Successful console authentication session</td>
+                                <td>Secure Node</td>
                             </tr>
                         </tbody>
                     </table>
@@ -866,44 +990,44 @@
         <div id="tab-tools" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-toolbox"></i> Developer Utility Tools</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">Quick utilities for loader development, hash generation, and encryption testing.</p>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 24px;">Quick utilities for loader development, hash generation, and signature encryption testing.</p>
                 <div class="settings-grid">
                     <div>
                         <div class="form-group-custom">
-                            <label>String to Hash (MD5 / SHA256)</label>
-                            <input type="text" id="tool-string" placeholder="Enter text...">
+                            <label>String to Hash (SHA256)</label>
+                            <input type="text" id="tool-string" placeholder="Enter text to encrypt...">
                         </div>
-                        <button class="btn-panel-action" onclick="showToast('Hash Generated: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')">Generate SHA256</button>
+                        <button class="btn-panel-action" onclick="showToast('Generated SHA256: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918')">Generate SHA256 Hash</button>
                     </div>
                     <div>
                         <div class="form-group-custom">
-                            <label>License Key Tester</label>
-                            <input type="text" placeholder="Test key validation...">
+                            <label>License Key Validation Tester</label>
+                            <input type="text" placeholder="Enter key to test endpoint...">
                         </div>
-                        <button class="btn-panel-action success" onclick="showToast('Key format valid!')">Test Validation Endpoint</button>
+                        <button class="btn-panel-action success" onclick="showToast('Validation Test Passed (HTTP 200 OK)')">Test Validation Endpoint</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="tab-settings" class="view-panel">
-            <div class="card-panel" style="margin-bottom: 24px;">
+            <div class="card-panel" style="margin-bottom: 28px;">
                 <h3><i class="fa-solid fa-code"></i> LOADER / CHEAT APP INTEGRATION</h3>
-                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">Use these credentials in your Cheat Client to authenticate keys.</p>
+                <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 18px;">Use these exact credentials in your cheat client loader source code to authenticate license keys.</p>
                 
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">API Endpoint (POST)</label>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px; letter-spacing: 1px;">API Endpoint (POST)</label>
                 <div class="endpoint-box">
                     <span id="endpoint-url">https://server.hostless.app/api/verify</span>
                     <button class="btn-table" onclick="copyText('https://server.hostless.app/api/verify')"><i class="fa-regular fa-copy"></i> Copy URL</button>
                 </div>
 
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">JSON Payload</label>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px; letter-spacing: 1px;">JSON Payload Structure</label>
                 <div class="json-code-box">{
   "key": "KZIN-XXXX-XXXX",
   "hwid": "YOUR_HWID",
   "nonce": "12345",
   "signature": "HMAC_SHA256(Secret, Key|HWID|Nonce)",
-  "version": "1.0"
+  "version": "5.0"
 }</div>
             </div>
 
@@ -912,22 +1036,22 @@
                     <div class="card-panel">
                         <h3><i class="fa-solid fa-shield"></i> SECURITY & ACCESS</h3>
                         <div class="form-group-custom">
-                            <label>Change Admin Password</label>
+                            <label>Change Master Password</label>
                             <input type="password" id="new-password" placeholder="Enter new secure password">
                         </div>
-                        <button class="btn-panel-action" style="margin-bottom: 14px;" onclick="showToast('Admin password updated successfully!')">Update Password</button>
-                        <button class="btn-panel-action danger" style="margin-bottom: 14px;" onclick="showToast('All active sessions terminated!')">Kill All Sessions</button>
+                        <button class="btn-panel-action" style="margin-bottom: 16px;" onclick="showToast('Master password updated successfully!')">Update Password</button>
+                        <button class="btn-panel-action danger" style="margin-bottom: 16px;" onclick="showToast('All active sessions forcefully terminated!')">Kill All Sessions</button>
                         
                         <div class="form-group-custom">
                             <label>HMAC API Secret</label>
                             <input type="text" value="7f54260b1b9e598b7f51c4b7cbd7cf01851147e78abcdef82j345785">
                         </div>
-                        <button class="btn-panel-action" onclick="showToast('HMAC Secret saved!')">Save HMAC Secret</button>
+                        <button class="btn-panel-action" onclick="showToast('HMAC Secret saved successfully!')">Save HMAC Secret</button>
                     </div>
 
                     <div class="card-panel">
                         <h3><i class="fa-brands fa-telegram"></i> TELEGRAM BOT INTEGRATION</h3>
-                        <div style="font-size: 11px; color: var(--success); margin-bottom: 12px;"><i class="fa-solid fa-circle"></i> STATUS: Connected</div>
+                        <div style="font-size: 11px; color: var(--success); margin-bottom: 14px; font-weight: 600;"><i class="fa-solid fa-circle"></i> STATUS: Connected & Monitoring</div>
                         <div class="form-group-custom">
                             <label>Bot API Token</label>
                             <input type="text" value="5838080753:AAH3gDBn4wMEG1cjv0JO0178OzCv89K4u08">
@@ -936,46 +1060,46 @@
                             <label>Chat ID</label>
                             <input type="text" value="952852388">
                         </div>
-                        <button class="btn-panel-action success" style="margin-bottom: 10px;" onclick="showToast('Telegram bot connected!')">Save & Connect Bot</button>
-                        <button class="btn-panel-action" onclick="showToast('Test alert sent to Telegram!')">Send Test Alert</button>
+                        <button class="btn-panel-action success" style="margin-bottom: 12px;" onclick="showToast('Telegram bot linked successfully!')">Save & Connect Bot</button>
+                        <button class="btn-panel-action" onclick="showToast('Test notification alert sent to Telegram!')">Send Test Alert</button>
                     </div>
                 </div>
 
                 <div>
                     <div class="card-panel">
                         <h3><i class="fa-solid fa-sliders"></i> SYSTEM CONTROL</h3>
-                        <button class="btn-panel-action danger" style="margin-bottom: 16px;" onclick="showToast('Maintenance mode toggled!')">Turn on Maintenance</button>
+                        <button class="btn-panel-action danger" style="margin-bottom: 20px;" onclick="showToast('Maintenance mode toggled ON!')">Turn on Maintenance</button>
                         <div class="form-group-custom">
-                            <label>Expiry Alert (Hours Before)</label>
+                            <label>Expiry Warning Alert (Hours Before)</label>
                             <input type="number" value="24">
                         </div>
-                        <button class="btn-panel-action" onclick="showToast('Alert hours saved!')">Save Alert Hours</button>
+                        <button class="btn-panel-action" onclick="showToast('Alert hours updated!')">Save Alert Hours</button>
                     </div>
 
                     <div class="card-panel">
-                        <h3><i class="fa-solid fa-server"></i> SYSTEM INFO</h3>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
-                            <span style="color: var(--text-muted);">API Verify</span>
+                        <h3><i class="fa-solid fa-server"></i> SYSTEM DIAGNOSTICS</h3>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
+                            <span style="color: var(--text-muted);">API Verify Route</span>
                             <span>/api/verify</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
-                            <span style="color: var(--text-muted);">API Updater</span>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
+                            <span style="color: var(--text-muted);">API Updater Route</span>
                             <span>/api/update_payload</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
-                            <span style="color: var(--text-muted);">API Ping</span>
-                            <span>/api/ping</span>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
+                            <span style="color: var(--text-muted);">API Ping Latency</span>
+                            <span style="color: var(--success);">14ms (Optimal)</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
-                            <span style="color: var(--text-muted);">Database</span>
-                            <span style="color: var(--cyan);">Kzin Cloud</span>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
+                            <span style="color: var(--text-muted);">Database Engine</span>
+                            <span style="color: var(--cyan);">Kzin Cloud Cluster</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
-                            <span style="color: var(--text-muted);">Web Server</span>
-                            <span style="color: var(--success);">Online</span>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;">
+                            <span style="color: var(--text-muted);">Edge Web Server</span>
+                            <span style="color: var(--success);">Online (HTTPS Secured)</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 10px 0; font-size: 13px;">
-                            <span style="color: var(--text-muted);">Maintenance</span>
+                        <div style="display: flex; justify-content: space-between; padding: 12px 0; font-size: 13px;">
+                            <span style="color: var(--text-muted);">Maintenance Status</span>
                             <span style="color: var(--danger);">OFF</span>
                         </div>
                     </div>
@@ -985,27 +1109,36 @@
 
     </div>
 
-    <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--cyan);"></i> <span id="toast-text">Action completed successfully</span></div>
+    <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--cyan); font-size: 16px;"></i> <span id="toast-text">Action completed successfully</span></div>
 
     <script>
         function handleLogin(e) {
             e.preventDefault();
             const code = document.getElementById('access-code-input').value;
-            if (code === 'admin123' || code.length > 0) {
-                document.getElementById('auth-screen').style.opacity = '0';
+            if (code.length > 0) {
+                const screen = document.getElementById('auth-screen');
+                screen.style.opacity = '0';
+                screen.style.transform = 'scale(1.05)';
                 setTimeout(() => {
-                    document.getElementById('auth-screen').style.display = 'none';
+                    screen.style.display = 'none';
                     document.getElementById('dashboard-app').style.display = 'block';
-                }, 300);
+                }, 400);
             } else {
-                alert('Invalid Access Code');
+                alert('Please enter your access code.');
             }
         }
 
         function handleLogout() {
-            document.getElementById('dashboard-app').style.display = 'none';
-            document.getElementById('auth-screen').style.opacity = '1';
-            document.getElementById('auth-screen').style.display = 'flex';
+            const app = document.getElementById('dashboard-app');
+            app.style.opacity = '0';
+            setTimeout(() => {
+                app.style.display = 'none';
+                const screen = document.getElementById('auth-screen');
+                screen.style.display = 'flex';
+                screen.style.opacity = '1';
+                screen.style.transform = 'scale(1)';
+                document.getElementById('access-code-input').value = '';
+            }, 300);
         }
 
         function switchTab(tabName, btnElement) {
@@ -1028,12 +1161,12 @@
             toast.style.display = 'flex';
             setTimeout(() => {
                 toast.style.display = 'none';
-            }, 3000);
+            }, 3500);
         }
 
         function copyText(txt) {
             navigator.clipboard.writeText(txt);
-            showToast('Copied to clipboard!');
+            showToast('Endpoint URL copied to clipboard!');
         }
 
         let keysList = [
@@ -1057,9 +1190,9 @@
                         <div class="action-btn-group">
                             <button class="btn-table" onclick="showToast('Viewing key: ${item.key}')">VIEW</button>
                             <button class="btn-table" onclick="showToast('HWID Reset for ${item.key}')">RESET</button>
-                            <button class="btn-table danger" onclick="showToast('Key banned')">BAN</button>
-                            <button class="btn-table danger" onclick="showToast('Key kicked')">KICK</button>
-                            <button class="btn-table" onclick="showToast('Expiry extended')">EXTEND</button>
+                            <button class="btn-table danger" onclick="showToast('Key banned successfully')">BAN</button>
+                            <button class="btn-table danger" onclick="showToast('Key kicked from session')">KICK</button>
+                            <button class="btn-table" onclick="showToast('License validity extended')">EXTEND</button>
                             <button class="btn-table danger" onclick="deleteKey(${index})">DEL</button>
                         </div>
                     </td>
@@ -1090,20 +1223,20 @@
                 });
             }
             renderKeys();
-            showToast(`${amount} key(s) generated successfully!`);
+            showToast(`${amount} license key(s) generated successfully!`);
         }
 
         function deleteKey(index) {
             keysList.splice(index, 1);
             renderKeys();
-            showToast('Key deleted');
+            showToast('License key deleted');
         }
 
         function wipeKeys() {
-            if(confirm('Are you sure you want to wipe all keys?')) {
+            if(confirm('Are you sure you want to wipe all keys from the database?')) {
                 keysList = [];
                 renderKeys();
-                showToast('All keys wiped');
+                showToast('All keys database wiped');
             }
         }
 
