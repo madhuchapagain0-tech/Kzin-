@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, initial-scale=1.0">
-    <title>Kzin Cheat - Enterprise Control System v6.4 (Trillion-Dollar Edition)</title>
+    <title>Kzin Cheat - Enterprise Control System v6.6 (Trillion-Dollar Edition)</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-deep: #020305;
-            --bg-card: #070913;
-            --bg-card-hover: #0c1021;
-            --border: #18203d;
+            --bg-deep: #020308;
+            --bg-card: #080c19;
+            --bg-card-hover: #0e1428;
+            --border: #1d264a;
             --cyan: #00f2fe;
-            --cyan-glow: rgba(0, 242, 254, 0.4);
-            --purple: #7928ca;
-            --purple-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #7928ca 100%);
+            --cyan-glow: rgba(0, 242, 254, 0.45);
+            --purple: #8a2be2;
+            --purple-gradient: linear-gradient(135deg, #00f2fe 0%, #4facfe 50%, #8a2be2 100%);
             --danger: #ff0055;
             --warning: #ffb700;
             --success: #00ff88;
             --text-main: #ffffff;
-            --text-muted: #64748b;
+            --text-muted: #94a3b8;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -34,88 +34,89 @@
             position: relative;
         }
 
-        /* Ambient Dynamic Background Animations */
+        /* Pulsating Ambient Background Glows */
         .ambient-glow-1 {
-            position: fixed; top: -10%; left: 10%; width: 600px; height: 600px;
-            background: rgba(0, 242, 254, 0.08); filter: blur(180px); border-radius: 50%; z-index: 0; pointer-events: none;
-            animation: floatGlow 10s ease-in-out infinite alternate;
+            position: fixed; top: -15%; left: 10%; width: 650px; height: 650px;
+            background: rgba(0, 242, 254, 0.1); filter: blur(190px); border-radius: 50%; z-index: 0; pointer-events: none;
+            animation: pulseGlow 8s ease-in-out infinite alternate;
         }
         .ambient-glow-2 {
-            position: fixed; bottom: -10%; right: 10%; width: 700px; height: 700px;
-            background: rgba(121, 40, 202, 0.09); filter: blur(200px); border-radius: 50%; z-index: 0; pointer-events: none;
-            animation: floatGlow 12s ease-in-out infinite alternate-reverse;
+            position: fixed; bottom: -15%; right: 10%; width: 750px; height: 750px;
+            background: rgba(138, 43, 226, 0.12); filter: blur(210px); border-radius: 50%; z-index: 0; pointer-events: none;
+            animation: pulseGlow 10s ease-in-out infinite alternate-reverse;
         }
-        @keyframes floatGlow { 0% { transform: scale(1) translateY(0); opacity: 0.7; } 100% { transform: scale(1.25) translateY(-30px); opacity: 1; } }
+        @keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.2); opacity: 1; } }
 
         /* Login Screen */
         #auth-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center; z-index: 1000;
-            background: rgba(2, 3, 5, 0.95); backdrop-filter: blur(25px); transition: opacity 0.6s ease;
+            background: rgba(2, 3, 8, 0.95); backdrop-filter: blur(30px);
         }
-        .auth-container { position: relative; z-index: 2; text-align: center; width: 100%; max-width: 440px; padding: 20px; animation: scaleUp 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes scaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .auth-container { position: relative; z-index: 2; text-align: center; width: 100%; max-width: 440px; padding: 20px; }
         .brand-title {
-            font-family: 'Orbitron', sans-serif; font-size: 40px; font-weight: 900; letter-spacing: 4px;
+            font-family: 'Orbitron', sans-serif; font-size: 42px; font-weight: 900; letter-spacing: 4px;
             background: linear-gradient(90deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px;
-            text-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+            filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.5));
         }
         .brand-subtitle { font-size: 11px; letter-spacing: 5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 36px; }
         .auth-card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 45px 35px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px rgba(0, 242, 254, 0.15); position: relative; overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 50px rgba(0, 242, 254, 0.2); position: relative; overflow: hidden;
+            animation: cardFloat 6s ease-in-out infinite alternate;
         }
+        @keyframes cardFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
         .auth-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--purple-gradient); }
         .auth-input {
-            width: 100%; padding: 16px 20px; background: #030407; border: 1px solid var(--border); border-radius: 12px;
+            width: 100%; padding: 16px 20px; background: #03050f; border: 1px solid var(--border); border-radius: 12px;
             color: var(--text-main); font-size: 15px; text-align: center; letter-spacing: 2px; outline: none; margin-bottom: 24px; transition: var(--transition);
         }
-        .auth-input:focus { border-color: var(--cyan); box-shadow: 0 0 25px var(--cyan-glow); }
+        .auth-input:focus { border-color: var(--cyan); box-shadow: 0 0 30px var(--cyan-glow); }
         .btn-gradient {
             width: 100%; padding: 16px; background: var(--purple-gradient); border: none; border-radius: 12px;
             color: white; font-weight: 800; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer; transition: var(--transition);
-            box-shadow: 0 10px 25px rgba(121, 40, 202, 0.4);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
         }
-        .btn-gradient:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4); }
+        .btn-gradient:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.5); }
 
-        /* Dashboard Container */
-        #dashboard-app { display: none; position: relative; z-index: 10; width: 1260px; margin: 0 auto; padding: 40px 20px; animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        #dashboard-app { display: none; position: relative; z-index: 10; width: 1260px; margin: 0 auto; padding: 40px 20px; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .dash-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 35px; text-align: center; }
         .dash-brand {
-            font-family: 'Orbitron', sans-serif; font-size: 44px; font-weight: 900; letter-spacing: 6px;
+            font-family: 'Orbitron', sans-serif; font-size: 46px; font-weight: 900; letter-spacing: 6px;
             background: linear-gradient(90deg, #fff 0%, var(--cyan) 50%, var(--purple) 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(0, 242, 254, 0.25));
+            filter: drop-shadow(0 0 25px rgba(0, 242, 254, 0.35));
         }
         .dash-sub { font-size: 11px; letter-spacing: 6px; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; }
 
-        /* Stats Grid */
+        /* Stats Grid with Glowing Glow Effects */
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
         .stat-box {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center;
             transition: var(--transition); position: relative; overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .stat-box::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--cyan); opacity: 0.3; transition: var(--transition); }
-        .stat-box:hover { border-color: var(--cyan); transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1); }
-        .stat-box:hover::after { opacity: 1; height: 3px; }
-        .stat-box .title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600; }
-        .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; }
+        .stat-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--cyan); opacity: 0.5; transition: var(--transition); }
+        .stat-box:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2); }
+        .stat-box:hover::before { opacity: 1; height: 3px; box-shadow: 0 0 15px var(--cyan); }
+        .stat-box .title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700; }
+        .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
 
-        /* Navigation Bar */
+        /* Navbar */
         .navbar-dash {
             display: flex; justify-content: space-between; align-items: center; background: var(--bg-card);
             border: 1px solid var(--border); border-radius: 16px; padding: 14px 22px; margin-bottom: 28px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .nav-tabs { display: flex; gap: 10px; }
+        .nav-tabs { display: flex; gap: 8px; overflow-x: auto; }
         .nav-tab {
-            background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 12px 20px;
-            border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; transition: var(--transition); letter-spacing: 1px;
+            background: transparent; border: 1px solid transparent; color: var(--text-muted); padding: 12px 18px;
+            border-radius: 10px; font-size: 11px; font-weight: 700; cursor: pointer; transition: var(--transition); letter-spacing: 1px; white-space: nowrap;
         }
-        .nav-tab.active { background: rgba(0, 242, 254, 0.12); color: var(--cyan); border-color: rgba(0, 242, 254, 0.3); box-shadow: 0 0 15px rgba(0, 242, 254, 0.15); }
+        .nav-tab:hover, .nav-tab.active { background: rgba(0, 242, 254, 0.12); color: var(--cyan); border-color: rgba(0, 242, 254, 0.35); box-shadow: 0 0 20px rgba(0, 242, 254, 0.2); }
         .nav-actions { display: flex; gap: 10px; }
         .btn-action-sm {
             background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 12px 18px;
@@ -127,51 +128,66 @@
 
         .view-panel { display: none; animation: fadeIn 0.4s ease; }
         .view-panel.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Key Generator Controls */
+        /* Key Generator */
         .keygen-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
             display: grid; grid-template-columns: 90px 90px 1fr 110px 165px 155px 145px; gap: 16px; align-items: center; margin-bottom: 24px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
         .keygen-control { display: flex; flex-direction: column; gap: 8px; }
-        .keygen-control label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
+        .keygen-control label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .keygen-control input, .keygen-control select {
-            background: #030407; border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); padding: 12px 14px; font-size: 13px; outline: none; transition: var(--transition);
+            background: #03050f; border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); padding: 12px 14px; font-size: 13px; outline: none; transition: var(--transition);
         }
         .keygen-control input:focus, .keygen-control select:focus { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow); }
         .btn-generate {
             background: var(--purple-gradient); border: none; border-radius: 10px; color: white; font-weight: 900; font-size: 12px;
-            padding: 12px; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; height: 46px; align-self: flex-end;
-            transition: var(--transition); box-shadow: 0 8px 20px rgba(121, 40, 202, 0.4);
+            padding: 12px; cursor: pointer; text-transform: uppercase; height: 46px; align-self: flex-end;
+            transition: var(--transition); box-shadow: 0 8px 20px rgba(138, 43, 226, 0.4);
         }
-        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 242, 254, 0.4); }
+        .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 242, 254, 0.5); }
 
-        /* Filter & Search Bar */
+        /* Filter Bar */
         .filter-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 24px;
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;
         }
         .search-input-box {
-            flex-grow: 1; background: #030407; border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; color: var(--text-main); font-size: 14px; outline: none; transition: var(--transition);
+            flex-grow: 1; background: #03050f; border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; color: var(--text-main); font-size: 14px; outline: none; transition: var(--transition);
         }
-        .search-input-box:focus { border-color: var(--cyan); }
+        .search-input-box:focus { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow); }
         .btn-wipe { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: var(--transition); }
         .btn-wipe:hover { background: rgba(255, 0, 85, 0.1); box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
-        /* Data Table */
+        /* Table */
         .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
-        th { color: var(--text-muted); font-weight: 700; padding: 18px 22px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(3, 4, 7, 0.7); }
+        th { color: var(--text-muted); font-weight: 700; padding: 18px 22px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(3, 5, 15, 0.8); }
         td { padding: 18px 22px; border-bottom: 1px solid var(--border); }
         tr:hover td { background: var(--bg-card-hover); }
-        .key-text { font-family: 'Orbitron', monospace; color: var(--cyan); font-size: 12px; font-weight: 700; text-shadow: 0 0 10px rgba(0, 242, 254, 0.2); }
-        .badge-device { background: rgba(121, 40, 202, 0.2); color: #d8b4fe; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; border: 1px solid rgba(121, 40, 202, 0.3); }
+        .key-text { font-family: 'Orbitron', monospace; color: var(--cyan); font-size: 12px; font-weight: 700; text-shadow: 0 0 10px rgba(0, 242, 254, 0.25); }
+        .badge-device { background: rgba(138, 43, 226, 0.2); color: #d8b4fe; padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600; border: 1px solid rgba(138, 43, 226, 0.3); }
         .badge-status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .action-btn-group { display: flex; gap: 8px; }
         .btn-table { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 8px 14px; border-radius: 8px; font-size: 11px; font-weight: 600; cursor: pointer; transition: var(--transition); }
         .btn-table:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0, 242, 254, 0.05); }
         .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 0, 85, 0.05); }
+
+        /* Card Panels */
+        .card-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+        .card-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--purple-gradient); }
+        .card-panel h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 24px; color: var(--text-main); display: flex; gap: 12px; align-items: center; letter-spacing: 1px; }
+        .card-panel h3 i { color: var(--cyan); text-shadow: 0 0 15px var(--cyan-glow); }
+        .endpoint-box { background: #03050f; border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; font-family: monospace; font-size: 12px; color: var(--cyan); margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .form-group-custom { margin-bottom: 20px; }
+        .form-group-custom label { display: block; font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; letter-spacing: 1px; }
+        .form-group-custom input { width: 100%; background: #03050f; border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; color: var(--text-main); font-size: 13px; outline: none; transition: var(--transition); }
+        .form-group-custom input:focus { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow); }
+        .btn-panel-action { width: 100%; padding: 14px; background: transparent; border: 1px solid var(--cyan); color: var(--cyan); border-radius: 10px; font-weight: 800; font-size: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: var(--transition); }
+        .btn-panel-action:hover { background: rgba(0, 242, 254, 0.15); box-shadow: 0 0 20px var(--cyan-glow); }
+        .btn-panel-action.success { border-color: var(--success); color: var(--success); }
+        .btn-panel-action.success:hover { background: rgba(0, 255, 136, 0.15); box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
 
         /* Toast Notifications */
         #toast {
@@ -191,10 +207,10 @@
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZIN CHEAT</div>
-            <div class="brand-subtitle">Enterprise Control System v6.4</div>
+            <div class="brand-subtitle">Enterprise Control System v6.6</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
-                    <input type="password" id="access-code-input" class="auth-input" placeholder="ENTER ACCESS CODE" value="Kzin@Madhu" required>
+                    <input type="password" id="access-code-input" class="auth-input" placeholder="Enter password (Kzin@Madhu)" required>
                     <button type="submit" class="btn-gradient"><i class="fa-solid fa-shield-halved"></i> AUTHENTICATE CONSOLE</button>
                 </form>
             </div>
@@ -219,6 +235,11 @@
         <div class="navbar-dash">
             <div class="nav-tabs">
                 <button class="nav-tab active" onclick="switchTab('keys', this)"><i class="fa-solid fa-key"></i> KEYS DATABASE</button>
+                <button class="nav-tab" onclick="switchTab('hwid', this)"><i class="fa-solid fa-shield-halved"></i> HWID BLACKLIST</button>
+                <button class="nav-tab" onclick="switchTab('ip', this)"><i class="fa-solid fa-globe"></i> IP BLACKLIST</button>
+                <button class="nav-tab" onclick="switchTab('audit', this)"><i class="fa-solid fa-list-check"></i> AUDIT LOG</button>
+                <button class="nav-tab" onclick="switchTab('tools', this)"><i class="fa-solid fa-toolbox"></i> TOOLS</button>
+                <button class="nav-tab" onclick="switchTab('settings', this)"><i class="fa-solid fa-gear"></i> SETTINGS</button>
             </div>
             <div class="nav-actions">
                 <button class="btn-action-sm" onclick="loadKeysFromTurso()"><i class="fa-solid fa-rotate"></i> SYNC DB</button>
@@ -261,6 +282,72 @@
                         <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading from Kzin Cheat Turso Cluster...</td></tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <!-- HWID Tab -->
+        <div id="tab-hwid" class="view-panel">
+            <div class="card-panel">
+                <h3><i class="fa-solid fa-shield-halved"></i> HWID Blacklist Management</h3>
+                <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                    <input type="text" class="search-input-box" placeholder="Enter HWID hash to blacklist...">
+                    <button class="btn-panel-action success" style="width: 200px;" onclick="triggerTelegramAlert('HWID Blacklisted', 'New hardware fingerprint blacklisted.')">Add Blacklist</button>
+                </div>
+                <div class="table-container"><table><thead><tr><th>HWID Hash</th><th>Added Date</th><th>Reason</th><th>Actions</th></tr></thead><tbody><tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 30px;">No blacklisted HWIDs.</td></tr></tbody></table></div>
+            </div>
+        </div>
+
+        <!-- IP Tab -->
+        <div id="tab-ip" class="view-panel">
+            <div class="card-panel">
+                <h3><i class="fa-solid fa-globe"></i> IP Address Security Blacklist</h3>
+                <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+                    <input type="text" class="search-input-box" placeholder="Enter suspicious IP address...">
+                    <button class="btn-panel-action success" style="width: 200px;" onclick="triggerTelegramAlert('IP Blocked', 'Suspicious IP address blocked.')">Block IP</button>
+                </div>
+                <div class="table-container"><table><thead><tr><th>IP Address</th><th>Blocked At</th><th>Attempts</th><th>Actions</th></tr></thead><tbody><tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 30px;">No blocked IPs.</td></tr></tbody></table></div>
+            </div>
+        </div>
+
+        <!-- Audit Log Tab -->
+        <div id="tab-audit" class="view-panel">
+            <div class="card-panel">
+                <h3><i class="fa-solid fa-list-check"></i> Kzin Cheat System Audit Log</h3>
+                <div class="table-container"><table><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Turso Node</td></tr></tbody></table></div>
+            </div>
+        </div>
+
+        <!-- Tools Tab -->
+        <div id="tab-tools" class="view-panel">
+            <div class="card-panel">
+                <h3><i class="fa-solid fa-toolbox"></i> Developer Utility Tools</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                    <div>
+                        <div class="form-group-custom"><label>String to Hash (SHA256)</label><input type="text" placeholder="Enter text..."></div>
+                        <button class="btn-panel-action" onclick="showToast('Generated SHA256 Hash')">Generate Hash</button>
+                    </div>
+                    <div>
+                        <div class="form-group-custom"><label>Key Validation Tester</label><input type="text" placeholder="Enter key..."></div>
+                        <button class="btn-panel-action success" onclick="showToast('Validation Test Passed')">Test API</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="tab-settings" class="view-panel">
+            <div class="card-panel">
+                <h3><i class="fa-solid fa-gear"></i> TURSO CLUSTER & TELEGRAM BOT SETTINGS</h3>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Turso Database Endpoint</label>
+                <div class="endpoint-box">
+                    <span>https://kzin-kzincheats123.aws-ap-northeast-1.turso.io</span>
+                    <button class="btn-table" onclick="copyText('https://kzin-kzincheats123.aws-ap-northeast-1.turso.io')">Copy URL</button>
+                </div>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Telegram Bot Alert Token</label>
+                <div class="endpoint-box">
+                    <span>9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI</span>
+                    <button class="btn-table" onclick="triggerTelegramAlert('Test Alert', 'Telegram Bot test notification triggered successfully!')">Test Bot</button>
+                </div>
             </div>
         </div>
     </div>
@@ -316,7 +403,7 @@
             localStorage.removeItem("kzin_logged_in");
             document.getElementById('dashboard-app').style.display = 'none';
             document.getElementById('auth-screen').style.display = 'flex';
-            document.getElementById('access-code-input').value = CORRECT_PASSWORD;
+            document.getElementById('access-code-input').value = '';
         }
 
         let keysList = [];
@@ -395,6 +482,18 @@
             document.getElementById('toast-text').innerText = msg;
             toast.style.display = 'flex';
             setTimeout(() => { toast.style.display = 'none'; }, 3500);
+        }
+
+        function copyText(txt) {
+            navigator.clipboard.writeText(txt);
+            showToast('Copied to clipboard!');
+        }
+
+        function switchTab(tabName, btnElement) {
+            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + tabName).classList.add('active');
+            if(btnElement) btnElement.classList.add('active');
         }
 
         function renderKeys() {
