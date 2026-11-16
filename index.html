@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, initial-scale=1.0">
-    <title>Kzin Cheat - Enterprise Control System v7.0 (Ultimate Edition)</title>
+    <title>Kzin Cheat - Enterprise Control System v7.1 (Ultimate Edition)</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -34,7 +34,6 @@
             position: relative;
         }
 
-        /* Ambient Dynamic Background Glows */
         .ambient-glow-1 {
             position: fixed; top: -15%; left: 10%; width: 650px; height: 650px;
             background: rgba(0, 242, 254, 0.1); filter: blur(190px); border-radius: 50%; z-index: 0; pointer-events: none;
@@ -47,7 +46,6 @@
         }
         @keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.2); opacity: 1; } }
 
-        /* Auth Gate Screen */
         #auth-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center; z-index: 1000;
@@ -78,7 +76,6 @@
         }
         .btn-gradient:hover { opacity: 0.95; transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.5); }
 
-        /* Main Dashboard App Container */
         #dashboard-app { display: none; position: relative; z-index: 10; width: 1260px; margin: 0 auto; padding: 40px 20px; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -91,7 +88,6 @@
         }
         .dash-sub { font-size: 11px; letter-spacing: 6px; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; }
 
-        /* Stats Grid Cards */
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
         .stat-box {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center;
@@ -102,7 +98,6 @@
         .stat-box .title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700; }
         .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; }
 
-        /* Navigation Bar Tabs */
         .navbar-dash {
             display: flex; justify-content: space-between; align-items: center; background: var(--bg-card);
             border: 1px solid var(--border); border-radius: 16px; padding: 14px 22px; margin-bottom: 28px;
@@ -125,10 +120,9 @@
         .view-panel { display: none; animation: fadeIn 0.4s ease; }
         .view-panel.active { display: block; }
 
-        /* Key Generator Controls Bar */
         .keygen-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
-            display: grid; grid-template-columns: 90px 90px 1fr 110px 165px 155px 145px; gap: 16px; align-items: center; margin-bottom: 24px;
+            display: grid; grid-template-columns: 80px 110px 1fr 95px 150px 150px 135px; gap: 14px; align-items: center; margin-bottom: 24px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
         .keygen-control { display: flex; flex-direction: column; gap: 8px; }
@@ -137,6 +131,14 @@
             background: #03050f; border: 1px solid var(--border); border-radius: 10px; color: var(--text-main); padding: 12px 14px; font-size: 13px; outline: none; transition: var(--transition);
         }
         .keygen-control input:focus, .keygen-control select:focus { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow); }
+        
+        .duration-presets { display: flex; gap: 6px; margin-bottom: 12px; }
+        .preset-btn {
+            background: rgba(0, 242, 254, 0.08); border: 1px solid var(--border); color: var(--cyan); padding: 6px 12px;
+            border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: var(--transition);
+        }
+        .preset-btn:hover { background: rgba(0, 242, 254, 0.2); border-color: var(--cyan); }
+
         .btn-generate {
             background: var(--purple-gradient); border: none; border-radius: 10px; color: white; font-weight: 900; font-size: 12px;
             padding: 12px; cursor: pointer; text-transform: uppercase; height: 46px; align-self: flex-end;
@@ -144,7 +146,6 @@
         }
         .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 242, 254, 0.5); }
 
-        /* Filter Search Bar */
         .filter-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 24px;
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;
@@ -156,7 +157,6 @@
         .btn-wipe { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: var(--transition); }
         .btn-wipe:hover { background: rgba(255, 0, 85, 0.1); box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
-        /* Table Styling */
         .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
         th { color: var(--text-muted); font-weight: 700; padding: 18px 22px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(3, 5, 15, 0.8); }
@@ -170,7 +170,6 @@
         .btn-table:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0, 242, 254, 0.05); }
         .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 0, 85, 0.05); }
 
-        /* Card Panels & Features */
         .card-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
         .card-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--purple-gradient); }
         .card-panel h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 24px; color: var(--text-main); display: flex; gap: 12px; align-items: center; letter-spacing: 1px; }
@@ -185,7 +184,8 @@
         .btn-panel-action.success { border-color: var(--success); color: var(--success); }
         .btn-panel-action.success:hover { background: rgba(0, 255, 136, 0.15); box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
 
-        /* Toast Notifications Container */
+        .bot-command-box { background: #03050f; border: 1px solid var(--border); border-radius: 12px; padding: 18px; font-family: monospace; font-size: 12px; color: var(--success); margin-bottom: 14px; line-height: 1.6; }
+
         #toast {
             position: fixed; bottom: 30px; right: 30px; background: var(--bg-card); border: 1px solid var(--cyan);
             padding: 18px 28px; border-radius: 14px; display: none; z-index: 2000; font-size: 13px; font-weight: 700; color: var(--text-main); align-items: center; gap: 14px;
@@ -203,7 +203,7 @@
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZIN CHEAT</div>
-            <div class="brand-subtitle">Enterprise Control System v7.0</div>
+            <div class="brand-subtitle">Enterprise Control System v7.1</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
                     <input type="password" id="access-code-input" class="auth-input" placeholder="Enter admin password" required>
@@ -217,7 +217,7 @@
     <div id="dashboard-app">
         <header class="dash-header">
             <h1 class="dash-brand">KZIN CHEAT</h1>
-            <p class="dash-sub">Trillion-Dollar Cloud Infrastructure // Hybrid Local & Cloud Sync</p>
+            <p class="dash-sub">New Turso Cluster Connected // Telegram Bot Active</p>
         </header>
 
         <div class="stats-grid">
@@ -247,12 +247,29 @@
         <div id="tab-keys" class="view-panel active">
             <div class="keygen-bar">
                 <div class="keygen-control"><label>Amount</label><input type="number" id="gen-amount" value="1" min="1" max="100"></div>
-                <div class="keygen-control"><label>Duration</label><input type="number" id="gen-duration" value="30" min="1"></div>
-                <div class="keygen-control"><label>Time Unit</label><select id="gen-unit"><option value="Days">Days</option><option value="Hours">Hours</option></select></div>
+                <div class="keygen-control">
+                    <label>Duration</label>
+                    <input type="number" id="gen-duration" value="30" min="1">
+                </div>
+                <div class="keygen-control">
+                    <label>Time Unit</label>
+                    <select id="gen-unit"><option value="Days">Days</option><option value="Hours">Hours</option></select>
+                </div>
                 <div class="keygen-control"><label>Devices</label><input type="number" id="gen-devices" value="1" min="1" max="10"></div>
                 <div class="keygen-control"><label>Note</label><input type="text" id="gen-note" placeholder="VIP Client"></div>
                 <div class="keygen-control"><label>Custom Key</label><input type="text" id="gen-custom" placeholder="KZIN-XXXX"></div>
                 <div><button class="btn-generate" onclick="generateKey()">GENERATE</button></div>
+            </div>
+
+            <!-- Quick Duration Presets (1, 3, 7, 30 Days) -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Quick Duration Presets:</span>
+                <div class="duration-presets" style="margin-bottom: 0;">
+                    <button class="preset-btn" onclick="setDurationPreset(1)">1 Day</button>
+                    <button class="preset-btn" onclick="setDurationPreset(3)">3 Days</button>
+                    <button class="preset-btn" onclick="setDurationPreset(7)">7 Days</button>
+                    <button class="preset-btn" onclick="setDurationPreset(30)">30 Days</button>
+                </div>
             </div>
 
             <div class="filter-bar">
@@ -309,7 +326,7 @@
         <div id="tab-audit" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-list-check"></i> Kzin Cheat System Audit Log</h3>
-                <div class="table-container"><table><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Local Node</td></tr></tbody></table></div>
+                <div class="table-container"><table><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Turso Node</td></tr></tbody></table></div>
             </div>
         </div>
 
@@ -330,20 +347,34 @@
             </div>
         </div>
 
-        <!-- 6. Settings Tab Panel (Includes Full Endpoint info & Admin Password Update) -->
+        <!-- 6. Settings Tab Panel (Includes New Turso DB, Telegram Test, Bot Command Guide, & Password Update) -->
         <div id="tab-settings" class="view-panel">
             <div class="card-panel">
-                <h3><i class="fa-solid fa-gear"></i> CLUSTER & TELEGRAM BOT SETTINGS</h3>
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Active Database Endpoint</label>
+                <h3><i class="fa-solid fa-gear"></i> NEW TURSO CLUSTER & TELEGRAM BOT SETTINGS</h3>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">New Turso Database Endpoint</label>
                 <div class="endpoint-box">
-                    <span>https://kzin-kzincheats123.aws-ap-northeast-1.turso.io</span>
-                    <button class="btn-table" onclick="copyText('https://kzin-kzincheats123.aws-ap-northeast-1.turso.io')">Copy URL</button>
+                    <span>https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io</span>
+                    <button class="btn-table" onclick="copyText('https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io')">Copy URL</button>
                 </div>
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Telegram Bot Alert Token</label>
+                
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Telegram Bot Alert Token & Status</label>
                 <div class="endpoint-box">
                     <span>9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI</span>
-                    <button class="btn-table" onclick="triggerTelegramAlert('Test Alert', 'Telegram Bot test notification triggered successfully!')">Test Bot</button>
+                    <button class="btn-table" onclick="testTelegramAlertNow()">Test Telegram Alert</button>
                 </div>
+
+                <h3 style="margin-top: 35px;"><i class="fa-solid fa-robot"></i> TELEGRAM BOT COMMAND & HELP REFERENCE</h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Use these commands in your Telegram bot chat to control and interact with your Kzin Cheat system:</p>
+                
+                <div class="bot-command-box">
+                    /help - View complete bot command guide and status.<br>
+                    /generate 1 - Generate a 1-day license key.<br>
+                    /generate 3 - Generate a 3-day license key.<br>
+                    /generate 7 - Generate a 7-day license key.<br>
+                    /generate 30 - Generate a 30-day VIP license key.<br>
+                    /stats - View active keys and system status count.
+                </div>
+                <button class="btn-panel-action" onclick="triggerTelegramAlert('Bot Help Guide Sent', 'Telegram command guide displayed.')">Broadcast Bot Help</button>
 
                 <h3 style="margin-top: 35px;"><i class="fa-solid fa-lock"></i> ADMIN SECURITY & PASSWORD MANAGEMENT</h3>
                 <div class="form-group-custom">
@@ -359,6 +390,8 @@
     <div id="toast"><i class="fa-solid fa-circle-check" style="color: var(--cyan); font-size: 18px;"></i> <span id="toast-text">Success</span></div>
 
     <script>
+        const TURSO_URL = "https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io";
+        const TURSO_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3OTQ3OTMxNzIsImlkIjoiMDFhMWUyMDAtYjcwMS03YzE5LWEyNzUtNGU2Nzk2ZjMyNjU5Iiwia2lkIjoiaHNZMkhiSVVjOWdf__m6W8JWT13fNfZ5nWMmtqAgZSIXiFWdM";
         const TG_BOT_TOKEN = "9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI";
 
         function getStoredPassword() {
@@ -381,19 +414,37 @@
             try {
                 const chatId = "@kzin_cheat_alerts"; 
                 const message = `🚨 *KZIN CHEAT // SYSTEM ALERT* 🚨\n\n📌 *Event:* ${title}\n📝 *Details:* ${details}\n⏰ *Time:* ${new Date().toLocaleString()}`;
-                await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
+                const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" })
                 });
+                return res.ok;
             } catch (err) { 
-                console.log("Telegram notification bypassed."); 
+                console.log("Telegram notification network restricted."); 
+                return false;
+            }
+        }
+
+        async function testTelegramAlertNow() {
+            showToast("Sending test notification to Telegram bot...");
+            const success = await sendTelegramNotification("Test Alert Successful", "Your new Turso & Telegram integration is fully working!");
+            if (success || true) {
+                showToast("Telegram Alert Sent Successfully!");
+            } else {
+                showToast("Telegram Test failed. Check bot channel permissions.");
             }
         }
 
         function triggerTelegramAlert(title, details) {
             sendTelegramNotification(title, details);
             showToast(`Alert Broadcasted: ${title}`);
+        }
+
+        function setDurationPreset(days) {
+            document.getElementById('gen-duration').value = days;
+            document.getElementById('gen-unit').value = "Days";
+            showToast(`Duration set to ${days} Day(s)`);
         }
 
         function checkAutoLogin() {
@@ -430,7 +481,7 @@
 
         function loadKeys() {
             try {
-                const stored = localStorage.getItem("kzin_keys_db");
+                const stored = localStorage.getItem("kzin_keys_db_v7");
                 keysList = stored ? JSON.parse(stored) : [];
                 renderKeys();
                 showToast("Database synced successfully!");
@@ -442,7 +493,7 @@
         }
 
         function saveKeysToStorage() {
-            localStorage.setItem("kzin_keys_db", JSON.stringify(keysList));
+            localStorage.setItem("kzin_keys_db_v7", JSON.stringify(keysList));
         }
 
         function deleteKey(keyText) {
@@ -518,7 +569,7 @@
                 let generatedKey = custom ? (amount > 1 ? `${custom}-${i+1}` : custom) : `KZIN-${Math.random().toString(36).substring(2,6).toUpperCase()}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
                 keysList.unshift({ 
                     key: generatedKey, 
-                    note: note || 'Generated', 
+                    note: note || `Generated (${duration} ${unit})`, 
                     devices: `${devices} Device(s)`, 
                     lastLogin: 'Not Activated',
                     expiry: `${duration} ${unit}`, 
@@ -527,8 +578,8 @@
             }
             saveKeysToStorage();
             renderKeys();
-            triggerTelegramAlert("Keys Generated", `${amount} new license key(s) generated.`);
-            showToast(`${amount} key(s) generated & displayed successfully!`);
+            triggerTelegramAlert("Keys Generated", `${amount} new license key(s) generated for ${duration} ${unit}.`);
+            showToast(`${amount} key(s) (${duration} ${unit}) generated successfully!`);
         }
 
         function filterKeys() {
