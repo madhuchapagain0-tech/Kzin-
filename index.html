@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, initial-scale=1.0">
-    <title>Kzin Cheat - Enterprise Control System v6.6 (Trillion-Dollar Edition)</title>
+    <title>Kzin Cheat - Enterprise Control System v6.7</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -34,7 +34,6 @@
             position: relative;
         }
 
-        /* Pulsating Ambient Background Glows */
         .ambient-glow-1 {
             position: fixed; top: -15%; left: 10%; width: 650px; height: 650px;
             background: rgba(0, 242, 254, 0.1); filter: blur(190px); border-radius: 50%; z-index: 0; pointer-events: none;
@@ -47,7 +46,6 @@
         }
         @keyframes pulseGlow { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.2); opacity: 1; } }
 
-        /* Login Screen */
         #auth-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center; z-index: 1000;
@@ -64,9 +62,7 @@
         .auth-card {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 45px 35px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 50px rgba(0, 242, 254, 0.2); position: relative; overflow: hidden;
-            animation: cardFloat 6s ease-in-out infinite alternate;
         }
-        @keyframes cardFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-8px); } }
         .auth-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--purple-gradient); }
         .auth-input {
             width: 100%; padding: 16px 20px; background: #03050f; border: 1px solid var(--border); border-radius: 12px;
@@ -92,20 +88,16 @@
         }
         .dash-sub { font-size: 11px; letter-spacing: 6px; color: var(--text-muted); text-transform: uppercase; margin-top: 8px; }
 
-        /* Stats Grid with Glowing Glow Effects */
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 28px; }
         .stat-box {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; text-align: center;
-            transition: var(--transition); position: relative; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: var(--transition); position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .stat-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--cyan); opacity: 0.5; transition: var(--transition); }
         .stat-box:hover { border-color: var(--cyan); transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 242, 254, 0.2); }
-        .stat-box:hover::before { opacity: 1; height: 3px; box-shadow: 0 0 15px var(--cyan); }
         .stat-box .title { font-size: 10px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 700; }
-        .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .stat-box .value { font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900; color: #fff; }
 
-        /* Navbar */
         .navbar-dash {
             display: flex; justify-content: space-between; align-items: center; background: var(--bg-card);
             border: 1px solid var(--border); border-radius: 16px; padding: 14px 22px; margin-bottom: 28px;
@@ -124,12 +116,10 @@
         }
         .btn-action-sm:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0, 242, 254, 0.05); }
         .btn-action-sm.logout { border-color: rgba(255, 0, 85, 0.4); color: var(--danger); }
-        .btn-action-sm.logout:hover { background: rgba(255, 0, 85, 0.1); }
 
         .view-panel { display: none; animation: fadeIn 0.4s ease; }
         .view-panel.active { display: block; }
 
-        /* Key Generator */
         .keygen-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px;
             display: grid; grid-template-columns: 90px 90px 1fr 110px 165px 155px 145px; gap: 16px; align-items: center; margin-bottom: 24px;
@@ -148,7 +138,6 @@
         }
         .btn-generate:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(0, 242, 254, 0.5); }
 
-        /* Filter Bar */
         .filter-bar {
             background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 24px;
             display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; gap: 16px;
@@ -160,7 +149,6 @@
         .btn-wipe { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: var(--transition); }
         .btn-wipe:hover { background: rgba(255, 0, 85, 0.1); box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
 
-        /* Table */
         .table-container { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow-x: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; white-space: nowrap; }
         th { color: var(--text-muted); font-weight: 700; padding: 18px 22px; border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; background: rgba(3, 5, 15, 0.8); }
@@ -174,7 +162,6 @@
         .btn-table:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0, 242, 254, 0.05); }
         .btn-table.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(255, 0, 85, 0.05); }
 
-        /* Card Panels */
         .card-panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin-bottom: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
         .card-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--purple-gradient); }
         .card-panel h3 { font-family: 'Orbitron', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 24px; color: var(--text-main); display: flex; gap: 12px; align-items: center; letter-spacing: 1px; }
@@ -189,7 +176,6 @@
         .btn-panel-action.success { border-color: var(--success); color: var(--success); }
         .btn-panel-action.success:hover { background: rgba(0, 255, 136, 0.15); box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
 
-        /* Toast Notifications */
         #toast {
             position: fixed; bottom: 30px; right: 30px; background: var(--bg-card); border: 1px solid var(--cyan);
             padding: 18px 28px; border-radius: 14px; display: none; z-index: 2000; font-size: 13px; font-weight: 700; color: var(--text-main); align-items: center; gap: 14px;
@@ -203,14 +189,14 @@
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
 
-    <!-- Login Auth Screen -->
+    <!-- Login Auth Screen (Clean placeholder, secure password field) -->
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZIN CHEAT</div>
-            <div class="brand-subtitle">Enterprise Control System v6.6</div>
+            <div class="brand-subtitle">Enterprise Control System v6.7</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
-                    <input type="password" id="access-code-input" class="auth-input" placeholder="Enter password (Kzin@Madhu)" required>
+                    <input type="password" id="access-code-input" class="auth-input" placeholder="Enter admin password" required>
                     <button type="submit" class="btn-gradient"><i class="fa-solid fa-shield-halved"></i> AUTHENTICATE CONSOLE</button>
                 </form>
             </div>
@@ -313,7 +299,7 @@
         <div id="tab-audit" class="view-panel">
             <div class="card-panel">
                 <h3><i class="fa-solid fa-list-check"></i> Kzin Cheat System Audit Log</h3>
-                <div class="table-container"><table><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Turso Node</td></tr></tbody></table></div>
+                <div class="table-container"><thead><tr><th>Timestamp</th><th>Action Type</th><th>Details</th><th>Source</th></tr></thead><tbody id="audit-log-body"><tr><td>Just now</td><td><span style="color: var(--cyan);">ADMIN_LOGIN</span></td><td>Console session securely authorized</td><td>Turso Node</td></tr></tbody></table></div>
             </div>
         </div>
 
@@ -360,16 +346,19 @@
         const TG_BOT_TOKEN = "9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI";
         const CORRECT_PASSWORD = "Kzin@Madhu";
 
+        // Safe Telegram notification handler that will never block key generation if network/CORS blocks it
         async function sendTelegramNotification(title, details) {
-            const chatId = "@kzin_cheat_alerts"; 
-            const message = `🚨 *KZIN CHEAT // SYSTEM ALERT* 🚨\n\n📌 *Event:* ${title}\n📝 *Details:* ${details}\n⏰ *Time:* ${new Date().toLocaleString()}`;
             try {
+                const chatId = "@kzin_cheat_alerts"; 
+                const message = `🚨 *KZIN CHEAT // SYSTEM ALERT* 🚨\n\n📌 *Event:* ${title}\n📝 *Details:* ${details}\n⏰ *Time:* ${new Date().toLocaleString()}`;
                 await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" })
                 });
-            } catch (err) { console.log("Telegram alert dispatched."); }
+            } catch (err) { 
+                console.log("Telegram notification bypassed or network restricted."); 
+            }
         }
 
         function triggerTelegramAlert(title, details) {
@@ -395,7 +384,8 @@
                 initTursoTable();
                 triggerTelegramAlert("Admin Login", "Authorized administrator logged into Kzin Cheat dashboard.");
             } else {
-                showToast("Incorrect Password! Default is Kzin@Madhu");
+                showToast("Incorrect Password! Please try again.");
+                document.getElementById('access-code-input').value = '';
             }
         }
 
@@ -439,41 +429,52 @@
                     status: r[6].value
                 }));
                 renderKeys();
-                showToast("Synced with Kzin Cheat Turso Cluster!");
             } catch(err) { console.error("Load error:", err); }
         }
 
         async function saveKeyToTurso(item) {
-            await fetch(`${TURSO_URL}/v2/pipeline`, {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    requests: [{ type: "execute", stmt: { sql: "INSERT INTO licenses (license_key, note, devices, expiry, status) VALUES (?, ?, ?, ?, ?)", args: [{type:"text", value:item.key}, {type:"text", value:item.note}, {type:"text", value:item.devices}, {type:"text", value:item.expiry}, {type:"text", value:item.status}] } }]
-                })
-            });
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        requests: [{ type: "execute", stmt: { sql: "INSERT INTO licenses (license_key, note, devices, expiry, status) VALUES (?, ?, ?, ?, ?)", args: [{type:"text", value:item.key}, {type:"text", value:item.note}, {type:"text", value:item.devices}, {type:"text", value:item.expiry}, {type:"text", value:item.status}] } }]
+                    })
+                });
+            } catch (err) {
+                console.error("Save key error:", err);
+            }
         }
 
         async function deleteKeyFromTurso(keyText) {
-            await fetch(`${TURSO_URL}/v2/pipeline`, {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses WHERE license_key = ?", args: [{type:"text", value:keyText}] } }] })
-            });
-            loadKeysFromTurso();
-            triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
-            showToast("Key deleted from database");
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses WHERE license_key = ?", args: [{type:"text", value:keyText}] } }] })
+                });
+                loadKeysFromTurso();
+                triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
+                showToast("Key deleted from database");
+            } catch (err) {
+                console.error("Delete error:", err);
+            }
         }
 
         async function wipeKeys() {
             if(confirm("Wipe all keys from Kzin Cheat database?")) {
-                await fetch(`${TURSO_URL}/v2/pipeline`, {
-                    method: "POST",
-                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
-                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses" } }] })
-                });
-                loadKeysFromTurso();
-                triggerTelegramAlert("Database Wiped", "All keys purged from cluster.");
-                showToast("Database wiped successfully");
+                try {
+                    await fetch(`${TURSO_URL}/v2/pipeline`, {
+                        method: "POST",
+                        headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                        body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses" } }] })
+                    });
+                    loadKeysFromTurso();
+                    triggerTelegramAlert("Database Wiped", "All keys purged from cluster.");
+                    showToast("Database wiped successfully");
+                } catch (err) {
+                    console.error("Wipe error:", err);
+                }
             }
         }
 
