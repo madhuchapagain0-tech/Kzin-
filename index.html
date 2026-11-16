@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1280, initial-scale=1.0">
-    <title>Kzin Cheat - Enterprise Control System v7.1 (Ultimate Edition)</title>
+    <title>Kzin Cheat - Enterprise Control System v7.4</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -132,7 +132,7 @@
         }
         .keygen-control input:focus, .keygen-control select:focus { border-color: var(--cyan); box-shadow: 0 0 15px var(--cyan-glow); }
         
-        .duration-presets { display: flex; gap: 6px; margin-bottom: 12px; }
+        .duration-presets { display: flex; gap: 6px; }
         .preset-btn {
             background: rgba(0, 242, 254, 0.08); border: 1px solid var(--border); color: var(--cyan); padding: 6px 12px;
             border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; transition: var(--transition);
@@ -194,7 +194,7 @@
         @keyframes slideInRight { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     </style>
 </head>
-<body onload="checkAutoLogin()">
+<body onload="initSystemAuth()">
 
     <div class="ambient-glow-1"></div>
     <div class="ambient-glow-2"></div>
@@ -203,10 +203,10 @@
     <div id="auth-screen">
         <div class="auth-container">
             <div class="brand-title">KZIN CHEAT</div>
-            <div class="brand-subtitle">Enterprise Control System v7.1</div>
+            <div class="brand-subtitle">Enterprise Control System v7.4</div>
             <div class="auth-card">
                 <form onsubmit="handleLogin(event)">
-                    <input type="password" id="access-code-input" class="auth-input" placeholder="Enter admin password" required>
+                    <input type="password" id="access-code-input" class="auth-input" placeholder="Enter admin secret key" required>
                     <button type="submit" class="btn-gradient"><i class="fa-solid fa-shield-halved"></i> AUTHENTICATE CONSOLE</button>
                 </form>
             </div>
@@ -217,7 +217,7 @@
     <div id="dashboard-app">
         <header class="dash-header">
             <h1 class="dash-brand">KZIN CHEAT</h1>
-            <p class="dash-sub">New Turso Cluster Connected // Telegram Bot Active</p>
+            <p class="dash-sub">Turso Cloud Database Connected // Secret Key Auth Active</p>
         </header>
 
         <div class="stats-grid">
@@ -238,7 +238,7 @@
                 <button class="nav-tab" onclick="switchTab('settings', this)"><i class="fa-solid fa-gear"></i> SETTINGS</button>
             </div>
             <div class="nav-actions">
-                <button class="btn-action-sm" onclick="loadKeys()"><i class="fa-solid fa-rotate"></i> SYNC DB</button>
+                <button class="btn-action-sm" onclick="loadKeysFromTurso()"><i class="fa-solid fa-rotate"></i> SYNC DB</button>
                 <button class="btn-action-sm logout" onclick="handleLogout()"><i class="fa-solid fa-right-from-bracket"></i> LOGOUT</button>
             </div>
         </div>
@@ -264,7 +264,7 @@
             <!-- Quick Duration Presets (1, 3, 7, 30 Days) -->
             <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 20px; margin-bottom: 24px; display: flex; align-items: center; gap: 14px;">
                 <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Quick Duration Presets:</span>
-                <div class="duration-presets" style="margin-bottom: 0;">
+                <div class="duration-presets">
                     <button class="preset-btn" onclick="setDurationPreset(1)">1 Day</button>
                     <button class="preset-btn" onclick="setDurationPreset(3)">3 Days</button>
                     <button class="preset-btn" onclick="setDurationPreset(7)">7 Days</button>
@@ -273,7 +273,7 @@
             </div>
 
             <div class="filter-bar">
-                <input type="text" class="search-input-box" placeholder="Search keys in Kzin Cheat database..." id="search-input" onkeyup="filterKeys()">
+                <input type="text" class="search-input-box" placeholder="Search keys in Turso database..." id="search-input" onkeyup="filterKeys()">
                 <button class="btn-wipe" onclick="wipeKeys()">WIPE ALL</button>
             </div>
 
@@ -292,7 +292,7 @@
                         </tr>
                     </thead>
                     <tbody id="keys-table-body">
-                        <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading keys database...</td></tr>
+                        <tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">Loading keys from Turso Cloud...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -347,41 +347,35 @@
             </div>
         </div>
 
-        <!-- 6. Settings Tab Panel (Includes New Turso DB, Telegram Test, Bot Command Guide, & Password Update) -->
+        <!-- 6. Settings Tab Panel (Turso Database Secret Key Management) -->
         <div id="tab-settings" class="view-panel">
             <div class="card-panel">
-                <h3><i class="fa-solid fa-gear"></i> NEW TURSO CLUSTER & TELEGRAM BOT SETTINGS</h3>
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">New Turso Database Endpoint</label>
+                <h3><i class="fa-solid fa-gear"></i> TURSO CLUSTER & TELEGRAM BOT SETTINGS</h3>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Turso Database Endpoint</label>
                 <div class="endpoint-box">
                     <span>https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io</span>
                     <button class="btn-table" onclick="copyText('https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io')">Copy URL</button>
                 </div>
                 
-                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Telegram Bot Alert Token & Status</label>
+                <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Telegram Bot Token</label>
                 <div class="endpoint-box">
-                    <span>9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI</span>
+                    <span>9101381366:AAHiq6jdx9mPYbhBFxFYq8VfoJeQXQg7Lc8</span>
                     <button class="btn-table" onclick="testTelegramAlertNow()">Test Telegram Alert</button>
                 </div>
 
-                <h3 style="margin-top: 35px;"><i class="fa-solid fa-robot"></i> TELEGRAM BOT COMMAND & HELP REFERENCE</h3>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Use these commands in your Telegram bot chat to control and interact with your Kzin Cheat system:</p>
-                
-                <div class="bot-command-box">
-                    /help - View complete bot command guide and status.<br>
-                    /generate 1 - Generate a 1-day license key.<br>
-                    /generate 3 - Generate a 3-day license key.<br>
-                    /generate 7 - Generate a 7-day license key.<br>
-                    /generate 30 - Generate a 30-day VIP license key.<br>
-                    /stats - View active keys and system status count.
+                <div class="form-group-custom" style="margin-top: 15px;">
+                    <label>Telegram Chat ID (Numeric User ID or Channel ID)</label>
+                    <input type="text" id="tg-chat-id-input" placeholder="e.g. 123456789 or @channelname">
                 </div>
-                <button class="btn-panel-action" onclick="triggerTelegramAlert('Bot Help Guide Sent', 'Telegram command guide displayed.')">Broadcast Bot Help</button>
+                <button class="btn-panel-action" onclick="saveTelegramChatId()">Save Chat ID</button>
 
-                <h3 style="margin-top: 35px;"><i class="fa-solid fa-lock"></i> ADMIN SECURITY & PASSWORD MANAGEMENT</h3>
+                <h3 style="margin-top: 35px;"><i class="fa-solid fa-lock"></i> TURSO SECRET KEY / ADMIN PASSWORD MANAGEMENT</h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Updating this secret key will immediately save it to your Turso database and secure your console login:</p>
                 <div class="form-group-custom">
-                    <label>New Admin Password</label>
-                    <input type="password" id="new-admin-password" placeholder="Enter new password...">
+                    <label>New Secret Password / Key</label>
+                    <input type="password" id="new-admin-password" placeholder="Enter new secret key...">
                 </div>
-                <button class="btn-panel-action success" onclick="updateAdminPassword()">Update Password</button>
+                <button class="btn-panel-action success" onclick="updateTursoAdminPassword()">Update Secret in Turso</button>
             </div>
         </div>
     </div>
@@ -392,27 +386,25 @@
     <script>
         const TURSO_URL = "https://kzin-cheat-db-kzincheats123.aws-us-west-2.turso.io";
         const TURSO_TOKEN = "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3OTQ3OTMxNzIsImlkIjoiMDFhMWUyMDAtYjcwMS03YzE5LWEyNzUtNGU2Nzk2ZjMyNjU5Iiwia2lkIjoiaHNZMkhiSVVjOWdf__m6W8JWT13fNfZ5nWMmtqAgZSIXiFWdM";
-        const TG_BOT_TOKEN = "9101381366:AAHHAnjYdp37XgHzvSyRi5Wtj-ZInAOX2NI";
+        const TG_BOT_TOKEN = "9101381366:AAHiq6jdx9mPYbhBFxFYq8VfoJeQXQg7Lc8";
 
-        function getStoredPassword() {
-            return localStorage.getItem("kzin_admin_password") || "Kzin@Madhu";
+        function getStoredChatId() {
+            return localStorage.getItem("kzin_tg_chat_id") || "@kzin_cheat_alerts";
         }
 
-        function updateAdminPassword() {
-            const newPass = document.getElementById('new-admin-password').value.trim();
-            if (!newPass) {
-                showToast("Please enter a valid password!");
-                return;
+        function saveTelegramChatId() {
+            const val = document.getElementById('tg-chat-id-input').value.trim();
+            if(val) {
+                localStorage.setItem("kzin_tg_chat_id", val);
+                showToast("Telegram Chat ID saved successfully!");
+            } else {
+                showToast("Please enter a valid Chat ID!");
             }
-            localStorage.setItem("kzin_admin_password", newPass);
-            document.getElementById('new-admin-password').value = '';
-            triggerTelegramAlert("Password Updated", "Admin password was successfully changed.");
-            showToast("Admin password updated successfully!");
         }
 
         async function sendTelegramNotification(title, details) {
             try {
-                const chatId = "@kzin_cheat_alerts"; 
+                const chatId = getStoredChatId(); 
                 const message = `🚨 *KZIN CHEAT // SYSTEM ALERT* 🚨\n\n📌 *Event:* ${title}\n📝 *Details:* ${details}\n⏰ *Time:* ${new Date().toLocaleString()}`;
                 const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
                     method: "POST",
@@ -428,11 +420,11 @@
 
         async function testTelegramAlertNow() {
             showToast("Sending test notification to Telegram bot...");
-            const success = await sendTelegramNotification("Test Alert Successful", "Your new Turso & Telegram integration is fully working!");
-            if (success || true) {
+            const success = await sendTelegramNotification("Test Alert Successful", "Your Turso & Telegram integration is fully working!");
+            if (success) {
                 showToast("Telegram Alert Sent Successfully!");
             } else {
-                showToast("Telegram Test failed. Check bot channel permissions.");
+                showToast("Failed! Make sure bot started a chat or is admin.");
             }
         }
 
@@ -447,25 +439,96 @@
             showToast(`Duration set to ${days} Day(s)`);
         }
 
+        // Initialize Turso DB tables (Licenses + Settings for Secret Password)
+        async function initSystemAuth() {
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        requests: [
+                            { type: "execute", stmt: { sql: "CREATE TABLE IF NOT EXISTS licenses (id INTEGER PRIMARY KEY AUTOINCREMENT, license_key TEXT UNIQUE NOT NULL, note TEXT, devices TEXT, last_login TEXT DEFAULT 'Not Activated', expiry TEXT NOT NULL, status TEXT DEFAULT 'Not Activated');" } },
+                            { type: "execute", stmt: { sql: "CREATE TABLE IF NOT EXISTS settings (key TEXT PRIMARY KEY, value TEXT NOT NULL);" } },
+                            { type: "execute", stmt: { sql: "INSERT OR IGNORE INTO settings (key, value) VALUES ('admin_password', 'Kzin@Madhu');" } }
+                        ]
+                    })
+                });
+                checkAutoLogin();
+            } catch(err) { 
+                console.error("Turso init error:", err);
+                checkAutoLogin();
+            }
+        }
+
+        async function checkAdminPasswordInTurso(inputPass) {
+            try {
+                const res = await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        requests: [{ type: "execute", stmt: { sql: "SELECT value FROM settings WHERE key = 'admin_password'" } }]
+                    })
+                });
+                const data = await res.json();
+                if(data.results && data.results[0].response.result) {
+                    const rows = data.results[0].response.result.rows;
+                    if(rows.length > 0) {
+                        const dbPass = rows[0][0].value;
+                        return inputPass === dbPass;
+                    }
+                }
+            } catch(err) {
+                console.error("Password check error:", err);
+            }
+            return inputPass === "Kzin@Madhu"; // Fallback default
+        }
+
+        async function updateTursoAdminPassword() {
+            const newPass = document.getElementById('new-admin-password').value.trim();
+            if (!newPass) {
+                showToast("Please enter a valid secret key!");
+                return;
+            }
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        requests: [{ type: "execute", stmt: { sql: "UPDATE settings SET value = ? WHERE key = 'admin_password'", args: [{type:"text", value:newPass}] } }]
+                    })
+                });
+                document.getElementById('new-admin-password').value = '';
+                triggerTelegramAlert("Secret Key Updated", "Admin secret password was successfully updated in Turso DB.");
+                showToast("Admin secret key updated in Turso successfully!");
+            } catch(err) {
+                console.error("Update password error:", err);
+                showToast("Failed to update password in Turso.");
+            }
+        }
+
         function checkAutoLogin() {
             if (localStorage.getItem("kzin_logged_in") === "true") {
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('dashboard-app').style.display = 'block';
-                loadKeys();
+                if(localStorage.getItem("kzin_tg_chat_id")) {
+                    document.getElementById('tg-chat-id-input').value = localStorage.getItem("kzin_tg_chat_id");
+                }
+                loadKeysFromTurso();
             }
         }
 
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             const passwordInput = document.getElementById('access-code-input').value;
-            if (passwordInput === getStoredPassword()) {
+            const isValid = await checkAdminPasswordInTurso(passwordInput);
+            if (isValid) {
                 localStorage.setItem("kzin_logged_in", "true");
                 document.getElementById('auth-screen').style.display = 'none';
                 document.getElementById('dashboard-app').style.display = 'block';
-                loadKeys();
+                loadKeysFromTurso();
                 triggerTelegramAlert("Admin Login", "Authorized administrator logged into Kzin Cheat dashboard.");
             } else {
-                showToast("Incorrect Password! Please try again.");
+                showToast("Incorrect Secret Key! Please try again.");
                 document.getElementById('access-code-input').value = '';
             }
         }
@@ -479,38 +542,75 @@
 
         let keysList = [];
 
-        function loadKeys() {
+        async function loadKeysFromTurso() {
             try {
-                const stored = localStorage.getItem("kzin_keys_db_v7");
-                keysList = stored ? JSON.parse(stored) : [];
+                const res = await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "SELECT * FROM licenses ORDER BY id DESC" } }] })
+                });
+                const data = await res.json();
+                if(data.results && data.results[0].response.result) {
+                    const rows = data.results[0].response.result.rows;
+                    keysList = rows.map(r => ({
+                        key: r[1].value,
+                        note: r[2].value,
+                        devices: r[3].value,
+                        lastLogin: r[4].value,
+                        expiry: r[5].value,
+                        status: r[6].value
+                    }));
+                }
                 renderKeys();
-                showToast("Database synced successfully!");
-            } catch(err) {
+            } catch(err) { 
                 console.error("Load error:", err);
-                keysList = [];
                 renderKeys();
             }
         }
 
-        function saveKeysToStorage() {
-            localStorage.setItem("kzin_keys_db_v7", JSON.stringify(keysList));
+        async function saveKeyToTurso(item) {
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        requests: [{ type: "execute", stmt: { sql: "INSERT OR IGNORE INTO licenses (license_key, note, devices, expiry, status) VALUES (?, ?, ?, ?, ?)", args: [{type:"text", value:item.key}, {type:"text", value:item.note}, {type:"text", value:item.devices}, {type:"text", value:item.expiry}, {type:"text", value:item.status}] } }]
+                    })
+                });
+            } catch (err) {
+                console.error("Save key error:", err);
+            }
         }
 
-        function deleteKey(keyText) {
-            keysList = keysList.filter(item => item.key !== keyText);
-            saveKeysToStorage();
-            renderKeys();
-            triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
-            showToast("Key deleted from database");
+        async function deleteKeyFromTurso(keyText) {
+            try {
+                await fetch(`${TURSO_URL}/v2/pipeline`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses WHERE license_key = ?", args: [{type:"text", value:keyText}] } }] })
+                });
+                loadKeysFromTurso();
+                triggerTelegramAlert("Key Revoked", `License key ${keyText} was deleted.`);
+                showToast("Key deleted from database");
+            } catch (err) {
+                console.error("Delete error:", err);
+            }
         }
 
-        function wipeKeys() {
-            if(confirm("Wipe all keys from Kzin Cheat database?")) {
-                keysList = [];
-                saveKeysToStorage();
-                renderKeys();
-                triggerTelegramAlert("Database Wiped", "All keys purged from cluster.");
-                showToast("Database wiped successfully");
+        async function wipeKeys() {
+            if(confirm("Wipe all keys from Turso database?")) {
+                try {
+                    await fetch(`${TURSO_URL}/v2/pipeline`, {
+                        method: "POST",
+                        headers: { "Authorization": `Bearer ${TURSO_TOKEN}`, "Content-Type": "application/json" },
+                        body: JSON.stringify({ requests: [{ type: "execute", stmt: { sql: "DELETE FROM licenses" } }] })
+                    });
+                    loadKeysFromTurso();
+                    triggerTelegramAlert("Database Wiped", "All keys purged from Turso cluster.");
+                    showToast("Database wiped successfully");
+                } catch (err) {
+                    console.error("Wipe error:", err);
+                }
             }
         }
 
@@ -535,7 +635,7 @@
 
         function renderKeys() {
             const tbody = document.getElementById('keys-table-body');
-            tbody.innerHTML = keysList.length === 0 ? '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">No license keys found. Generate your first key above!</td></tr>' : 
+            tbody.innerHTML = keysList.length === 0 ? '<tr><td colspan="8" style="text-align: center; color: var(--text-muted); padding: 30px;">No license keys found in Turso. Generate your first key above!</td></tr>' : 
             keysList.map(item => `
                 <tr>
                     <td><input type="checkbox"></td>
@@ -548,7 +648,7 @@
                     <td>
                         <div class="action-btn-group">
                             <button class="btn-table" onclick="showToast('Viewing ${item.key}')">VIEW</button>
-                            <button class="btn-table danger" onclick="deleteKey('${item.key}')">DEL</button>
+                            <button class="btn-table danger" onclick="deleteKeyFromTurso('${item.key}')">DEL</button>
                         </div>
                     </td>
                 </tr>
@@ -557,7 +657,7 @@
             document.getElementById('stat-active').innerText = keysList.length;
         }
 
-        function generateKey() {
+        async function generateKey() {
             const amount = parseInt(document.getElementById('gen-amount').value) || 1;
             const duration = document.getElementById('gen-duration').value;
             const unit = document.getElementById('gen-unit').value;
@@ -567,19 +667,17 @@
 
             for(let i=0; i<amount; i++) {
                 let generatedKey = custom ? (amount > 1 ? `${custom}-${i+1}` : custom) : `KZIN-${Math.random().toString(36).substring(2,6).toUpperCase()}-${Math.random().toString(36).substring(2,6).toUpperCase()}`;
-                keysList.unshift({ 
+                await saveKeyToTurso({ 
                     key: generatedKey, 
                     note: note || `Generated (${duration} ${unit})`, 
                     devices: `${devices} Device(s)`, 
-                    lastLogin: 'Not Activated',
                     expiry: `${duration} ${unit}`, 
                     status: 'Not Activated' 
                 });
             }
-            saveKeysToStorage();
-            renderKeys();
+            loadKeysFromTurso();
             triggerTelegramAlert("Keys Generated", `${amount} new license key(s) generated for ${duration} ${unit}.`);
-            showToast(`${amount} key(s) (${duration} ${unit}) generated successfully!`);
+            showToast(`${amount} key(s) generated & saved to Turso database!`);
         }
 
         function filterKeys() {
